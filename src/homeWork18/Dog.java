@@ -17,7 +17,7 @@ public class Dog {
             jumpHeight += 10;
             System.out.println(name + " тренируется. Текущая высота прыжка: " + jumpHeight + " см");
         } else {
-            System.out.println(name + " не может тренироваться дальше.");
+
             fullyTrained = true;
         }
     }
@@ -32,7 +32,7 @@ public class Dog {
         } else {
             System.out.println(name + " не может перепрыгнуть барьер высотой " + barrierHeight + " см.");
             if (fullyTrained) {
-                System.out.println(name + " полностью натренирован и не может взять барьер выше.");
+                System.out.println(name + " идет тренироваться...");
             } else {
                 System.out.println(name + " может тренироваться, чтобы перепрыгнуть барьер.");
             }
