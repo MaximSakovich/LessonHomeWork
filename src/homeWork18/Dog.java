@@ -1,9 +1,9 @@
 package homeWork18;
 
 public class Dog {
-    String dogName;
-    int jumpHeight;
-    int increasingBarrier;
+    public String dogName;
+    public int jumpHeight;
+    public int increasingBarrier;
     private boolean fullyTrained;
 
     public Dog(String dogName, int jumpHeight, int increasingBarrier) {
