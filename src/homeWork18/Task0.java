@@ -1,5 +1,7 @@
 package homeWork18;
 
+import java.util.Scanner;
+
 public class Task0 {
 
     /*public class Dog {
