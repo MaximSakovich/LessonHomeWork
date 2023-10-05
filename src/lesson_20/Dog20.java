@@ -16,16 +16,17 @@ package lesson_20;
 
         */
 public class Dog20 {
+    static final int INCREASEPERONETRAINING = 10;
     private String name;
     private int jumpHeight;
 
-    private int increasePerOneTraining;
+   // private int increasePerOneTraining;
     private int maxJumpHeight;
 
     public Dog20(String name, int jumpHeight) {
         this.name = name;
         this.jumpHeight = jumpHeight;
-        this.increasePerOneTraining = 10;
+       // this.INCREASEPERONETRAINING = 10;
         this.maxJumpHeight = jumpHeight * 2;
     }
 
@@ -36,7 +37,7 @@ public class Dog20 {
     public void train() {
 
         if (jumpHeight < maxJumpHeight) {
-            jumpHeight += increasePerOneTraining;
+            jumpHeight += INCREASEPERONETRAINING;
         }
 
         if (jumpHeight > maxJumpHeight) {
