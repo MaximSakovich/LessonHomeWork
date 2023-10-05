@@ -11,6 +11,11 @@ public class Employee21 {
     private int age;
     private double salary;
 
+    // Статический блок инициализации
+    static  {
+        companyName = "Рога и копыта";
+    }
+
     // Конструктор для инициализации объекта Employee
     public Employee21(String name, int age, double salary) {
         this.id = nextId++;
@@ -46,16 +51,11 @@ public class Employee21 {
 
     // Метод info() для вывода информации о работнике
     public void info() {
-        System.out.println("Название фирмы: " + getCompanyName());
+        System.out.println("Название фирмы: " + companyName);
         System.out.println("Имя: " + name);
         System.out.println("Уникальный идентификатор: " + id);
         System.out.println("Возраст: " + age + " лет");
-        System.out.println("Зарплата: " + salary + " рублей");
-    }
-
-    public static String getCompanyName() {
-        companyName = "Рога и копыта";
-        return companyName;
+        System.out.printf("Зарплата: %.2f рублей%n", salary);
     }
 
 }
