@@ -1,7 +1,9 @@
 package lesson_13;
 
 import java.util.Random;
+
 import java.util.Scanner;
+
 
 public class SeaBattle {
     public static void main(String[] args) {

@@ -1,28 +1,59 @@
 package lesson_22;
 
+/*
+Написать класс Собака.
+Собака должна иметь имя и высоту прыжка
+Должна уметь прыгать и должна уметь тренироваться.
+За каждую тренировку высота прыжка увеличивается на 10 сантиметров
+Максимальная высота, которую может натренировать собака не может быть больше, чем 2 раза высоту первоначального прыжка.
+
+Также должен быть метод взять барьер.
+В параметрах метод принимает высоту прыжка.
+Если собака в состоянии преодолеть этот барьер - прыгает.
+Если не в состоянии, нужно проверить
+помогут ли тренировки (будет ли данная собака в принципе в состоянии взять барьер).
+
+Если да -> идем тренироваться -> берет барьер
+
+
+Добавить в класс константу.
+Использовать эту константу в классе.
+Добавить в класс поле, в котором будет храниться количество прыжков, сделанных всеми объектами класса.
+Добавить в класс статический метод, возвращающий общее количество прыжков, сделанных всеми собаками
+
+ */
 public class Dog {
-    static final int INCREASEPERONETRAINING = 10;
     private String name;
     private int jumpHeight;
 
-    // private int increasePerOneTraining;
-    private int maxJumpHeight;
+    //    private int increasePerOneTraining;
+    private final int maxJumpHeight;
+
+    private static int totalJumpCounter;
+
+    static final int INCREASE_BY_TRAIN = 10;
+    static final int MAX_JUMP_MULTIPLIER = 2;
 
     public Dog(String name, int jumpHeight) {
         this.name = name;
         this.jumpHeight = jumpHeight;
-        // this.INCREASEPERONETRAINING = 10;
-        this.maxJumpHeight = jumpHeight * 2;
+//        this.increasePerOneTraining = 10;
+        this.maxJumpHeight = jumpHeight * MAX_JUMP_MULTIPLIER;
     }
 
-    public void jump() {
+    public static int getTotalJumpCounter() {
+        return totalJumpCounter;
+    }
+
+    private void jump() {
         System.out.println(name + " прыгнула!");
+        totalJumpCounter++;
     }
 
     public void train() {
 
         if (jumpHeight < maxJumpHeight) {
-            jumpHeight += INCREASEPERONETRAINING;
+            jumpHeight += INCREASE_BY_TRAIN;
         }
 
         if (jumpHeight > maxJumpHeight) {
@@ -70,5 +101,3 @@ public class Dog {
         return "Dog " + name + "; current jump: " + jumpHeight;
     }
 }
-
-
