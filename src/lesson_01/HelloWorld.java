@@ -1,6 +1,6 @@
 package lesson_01;
 
-public class ok {
+public class HelloWorld {
     public static void main(String[] args) {
         int maFirstVariable;
         maFirstVariable = 1; //ok
@@ -18,5 +18,8 @@ public class ok {
         System.out.println("Число " + doubleVariable);
         doubleVariable = 5.432;
         System.out.println("Число " + doubleVariable);
+
+            System.out.println("Hello, World!");
+
    }
 }

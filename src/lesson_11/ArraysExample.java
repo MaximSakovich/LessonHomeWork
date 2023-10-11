@@ -3,7 +3,7 @@ package lesson_11;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Lesson_11 {
+public class ArraysExample {
     public static void main(String[] args) {
 
 //        int x = 0;
@@ -150,18 +150,5 @@ public class Lesson_11 {
         }
         System.out.println("минимальное значение в массиве: " + min);
 
-
-
-
-
     }
 }
-
-
-
-
-
-
-
-
-
