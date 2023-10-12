@@ -10,7 +10,7 @@ public class Bus {
     private BusDriver driver;
     private final Passenger[] passengers;
 
-    private final AutoPilot autoPilot;
+    private final AutoPilot autoPilot; // один из вариантов инициализации -> = new AutoPilot("V.001-B");
     private int amountPassengers;
     private static int counterForId;
     private static int ticketCounter;
@@ -21,6 +21,7 @@ public class Bus {
         this.id = counterForId++;
         passengers = new Passenger[capacity];
         this.autoPilot = new AutoPilot("V.001-B");
+        // this.autoPilot.setSoftwareVersion(softwareVersionAutopilot); возможно, в конструкторе придет версия Автопилота.
     }
 
     public Bus(String model, int capacity, BusDriver driver) {
@@ -33,6 +34,12 @@ public class Bus {
     }
 
     public boolean takePassenger(Passenger passenger) {
+        //проверка. Если пассажир уже находится в каком-либо автобусе (имеет билет) - не пускаем его в автобус.
+        if (passenger.getTicketNumber() != null){
+            System.out.println("Пассажир уже находится в каком-то автобусе. Билет не продан.");
+            return false;
+        }
+
         if (amountPassengers < capacity) {
             // Done выдать билет, изменить кол-во пассажиров в автобусе
             passenger.setTicketNumber(generateTicketNumber(passenger.getId()));
@@ -55,10 +62,18 @@ public class Bus {
 
         if (indexPassenger >= 0) {
 
-            //TODO надо сдвигать пассажиров с индексами больше indexPassenger влево
+            //Done надо сдвигать пассажиров с индексами больше indexPassenger влево
 
-            passengers[indexPassenger] = null;
+            for (int i = indexPassenger; i < amountPassengers - 1; i++) {
+                //Копируем всех пассажиров после индекса со сдвигом на 1 влево
+                passengers[i] = passengers[i + 1];
+            }
+
+            //Done дублирование последнего пассажира?
+
+//            passengers[indexPassenger] = null; эта строчка не нужна, т.к. passengers[index] был перезаписан passengers[index +1]
             passenger.setTicketNumber(null);
+            passengers[amountPassengers - 1] = null;
 
             amountPassengers--;
 
