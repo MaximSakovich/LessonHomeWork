@@ -12,7 +12,7 @@ class Circle extends Figure {
         return Math.PI * radius * radius;
     }
     @Override
-    public String getDescription() {
+    public String toString() {
         return String.format("Круг площадью %.2f кв.см", calculateArea());
     }
 }

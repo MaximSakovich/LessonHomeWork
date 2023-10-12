@@ -15,9 +15,8 @@ class Triangle extends Figure {
     }
 
     @Override
-    public String getDescription() {
+    public String toString() {
         return String.format("Треугольник площадью %.2f кв.см", calculateArea());
     }
-
 
 }

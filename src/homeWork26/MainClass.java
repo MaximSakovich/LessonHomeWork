@@ -8,7 +8,7 @@ public class MainClass {
         figures[2] = new Triangle(6.0, 3.0);
 
         for (Figure figure : figures) {
-            System.out.println(figure.getDescription());
+            System.out.println(figure.toString());
         }
 
     }

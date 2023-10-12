@@ -12,7 +12,7 @@ class Square extends Figure {
         return side * side;
     }
     @Override
-    public String getDescription() {
+    public String toString() {
         return String.format("Квадрат площадью %.2f кв.см", calculateArea());
     }
 
