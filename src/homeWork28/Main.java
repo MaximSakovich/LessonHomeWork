@@ -4,7 +4,7 @@ package homeWork28;
 public class Main {
     public static void main(String[] args) {
 
-        /*Task1
+        /* Task1
 Создать класс "Dictionary" - таблица слов и их переводов.
 dictionary.put("Hello", "Привет");
 dictionary.put("Bye", "Пока");
@@ -35,6 +35,5 @@ translator.translate(words); // {"Привет", "Пока", "Java"}
         for (String word : translatedWords) {
             System.out.println(word);
         }
-
     }
 }

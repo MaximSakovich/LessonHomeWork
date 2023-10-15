@@ -23,11 +23,6 @@ public class Dictionary {
             this.words = words;
             this.translate = translate;
         }
-  //  @Override
-  //  public String toString() {
-  //      return words + "-" + translate;
-  //  }
-
 }
     private final DictionaryPair[] pairs;
     private int count;
