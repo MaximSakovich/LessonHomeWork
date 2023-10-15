@@ -1,4 +1,4 @@
-package homeWork26;
+package homeWork26.task3;
 
 class Triangle extends Figure {
     private double base;
