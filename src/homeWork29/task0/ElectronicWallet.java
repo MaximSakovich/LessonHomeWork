@@ -1,6 +1,7 @@
 package homeWork29.task0;
 
 
+// Класс электронного кошелька
 class ElectronicWallet implements PaymentSystem {
     private double balance;
 

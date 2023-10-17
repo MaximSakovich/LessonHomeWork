@@ -1,6 +1,6 @@
 package homeWork29.task0;
 
-
+// Класс банковского счета
 class BankAccount implements PaymentSystem {
     private double balance;
 

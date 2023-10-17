@@ -1,12 +1,22 @@
 package lesson_29.interfaces;
 
+// public abstract interface Printable {
 public interface Printable {
+    // Интерфейсы косвенно абстрактны. Нам не нужно использовать ключевое слово abstract. Оно присутствует "по умолчанию"
+
+    // все методы интерфейса косвенно и абстрактные и публичные
+    // public abstract
     void print();
 
-default void test(){System.out.println("Test");}
-
-static void testStatic(String str) {System.out.println("Static method print: " + str);}
 
 
+    // Начиная c JDK8 доступны методы по умолчанию (имеющие реализацию)
+    default void test() {
+        System.out.println("Test");
+    }
 
+    // Начиная c JDK8 доступны статические методы в интерфейсах
+    static void testStatic(String str) {
+        System.out.println("Static method print: " + str);
+    }
 }

@@ -1,4 +1,4 @@
-package lesson_29.interfaces;
+package lesson_29.summable;
 
 public interface Summable {
     // по умолчанию "поля" интерфейса имеют модификаторы public static final
@@ -19,10 +19,3 @@ public interface Summable {
     }
 
 }
-
-
-
-
-
-
-

@@ -8,8 +8,9 @@ public class Book implements Printable {
         this.title = title;
         this.author = author;
     }
+
     @Override
     public void print() {
-        System.out.printf("Book %s (%s)", title, author);
+        System.out.printf("Book %s (%s)\n", title, author);
     }
 }
