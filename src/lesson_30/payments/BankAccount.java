@@ -16,7 +16,6 @@ public class BankAccount implements PaymentSystem {
     }
 
 
-
     @Override
     public String toString() {
         return "BankAccount{" +

@@ -1,6 +1,7 @@
 package lesson_30.generic;
 
-public class GenericBox<T> {
+// public class GenericBox<T extends Number> { ограничение типа сверху. При создании объекта я могу укзать этот класс или его наследников
+public class  GenericBox<T> {
     private T value;
 
     public GenericBox(T value) {
@@ -12,6 +13,7 @@ public class GenericBox<T> {
     }
 
     public void setValue(T value){
+
         this.value = value;
     }
 
@@ -21,4 +23,5 @@ public class GenericBox<T> {
                 "value=" + value +
                 '}';
     }
+
 }

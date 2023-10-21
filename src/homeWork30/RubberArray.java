@@ -16,7 +16,7 @@ public class RubberArray<T> {
         array = (T[]) new Object[10];
     }
 
-    @SuppressWarnings("unchecked")
+
     public RubberArray(int sizeDefault) {
         array = (T[]) new Object[sizeDefault];
     }
@@ -34,7 +34,7 @@ public class RubberArray<T> {
         }
     }
 
-    @SuppressWarnings("unchecked")
+
     private void expandArray() {
         T[] newArray = (T[]) new Object[array.length * MULTIPLIER];
         System.arraycopy(array, 0, newArray, 0, array.length);
@@ -89,7 +89,6 @@ public class RubberArray<T> {
         return false;
     }
 
-    @SuppressWarnings("unchecked")
     public T[] toArray() {
         T[] result = (T[]) new Object[cursor];
         System.arraycopy(array, 0, result, 0, cursor);

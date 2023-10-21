@@ -20,7 +20,7 @@ public class GenericsApp {
         for (int i = 0; i < boxes.length; i++) {
 
             // получим java.lang.ClassCastException при невозможности преобразовать Object в int
-            sum1 += (int) boxes[i].getValue();
+         //   sum1 += (int) boxes[i].getValue();
         }
 
         System.out.println(sum1);
