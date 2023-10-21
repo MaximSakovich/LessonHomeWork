@@ -6,7 +6,7 @@ public class BackpackNew {
         int[] weights = {3, 4, 5, 8, 9, 5, 7, 9, 12, 15, 17, 18, 20};
         int[] prices = {1, 6, 4, 7, 6, 4, 6, 10, 9, 10, 9, 12, 12};
 
-        int maxWeight = 56;
+        int maxWeight = 87;
 
         long count = 1 << weights.length;
 
@@ -14,7 +14,7 @@ public class BackpackNew {
         int maxState = 0;
         int maxStateWeight = 0;
         int itemCount = 0;
-        int totalPrice = 0;
+       // int totalPrice = 0;
 
         for (int state = 0; state < count; state++) {
             int price = 0;
@@ -33,7 +33,7 @@ public class BackpackNew {
                 maxState = state;
                 maxStateWeight = weight;
                 itemCount = countItems;
-                totalPrice = total;
+               // totalPrice = total;
             }
         }
 
@@ -45,12 +45,13 @@ public class BackpackNew {
         }
 
         System.out.println("Число элементов в рюкзаке: " + itemCount);
-        System.out.println("Общая стоимость элементов в рюкзаке: " + totalPrice);
-        System.out.println("Общая стоимость рюкзака: " + maxPrice);
-        System.out.println("Общий вес рюкзака: " + maxStateWeight);
+        System.out.println("Общая стоимость элементов в рюкзаке: " + maxPrice);
+        System.out.println("Общая вместимость рюкзака: " + maxWeight);
+        System.out.println("Общий вес элементов в рюкзаке: " + maxStateWeight);
 
         long endTime = System.currentTimeMillis();
         long duration = endTime - startTime;
+        System.out.println();
         System.out.println("Время выполнения: " + duration + " миллисекунд.");
     }
 }
