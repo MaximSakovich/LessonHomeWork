@@ -39,8 +39,7 @@ public class Main {
 
         Television television = new Television(channels);
         RemoteControl remoteControl = new RemoteControl(television);
-
-       Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         int selectedChannel;
         do {
             System.out.println("Выберите канал от 1 до 5 (для выключения Телевизора нажмите 0): ");
@@ -57,9 +56,4 @@ public class Main {
         scanner.close();
     }
 }
-
-
-
-
-
 

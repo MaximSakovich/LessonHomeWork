@@ -1,4 +1,4 @@
-package lesson_32;
+package lesson_34.myLinkedList;
 
 public class MyLinkedList<T>{
 

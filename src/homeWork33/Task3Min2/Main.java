@@ -2,7 +2,7 @@ package homeWork33.Task3Min2;
 
 public class Main {
     public static void main(String[] args) {
-                int[] array = new int[]{120, 42, 73, 41, 32, 53, 0, 24, 57, 42, -16, 55, 36};
+                int[] array = new int[]{120, 42, 73, 41, 32, 53, 187, 24, 57, 42, -16, 55, 36};
 
                 int min = Integer.MAX_VALUE;
                 int min2 = Integer.MAX_VALUE;
