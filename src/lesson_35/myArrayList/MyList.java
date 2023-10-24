@@ -15,13 +15,13 @@ public interface MyList<T> {
 
     T[] toArray();
 
-   boolean remove(T value);
+    boolean remove(T value);
 
     T remove(int index);
 
     // Отвечает на вопрос является ли коллекция пустой
-    // написать метод валидации isPasswordValid
     boolean isEmpty();
 
     T get(int index);
+
 }
