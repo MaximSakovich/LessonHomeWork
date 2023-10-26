@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 class PersonTest {
@@ -12,8 +13,6 @@ class PersonTest {
     Person person;
     String startEmail = "john@test.com";
     String startPassword = "qwerty1Q!";
-
-
 
 
 //    @BeforeAll // этот метод выполнится один раз перед запуском всех тестов (тестовых методов)
@@ -24,7 +23,8 @@ class PersonTest {
     //@AfterAll // метод выполнится один раз после всех тестов
 
 
-    @BeforeEach // метод выполняется перед каждым тестом
+    @BeforeEach
+        // метод выполняется перед каждым тестом
     void setUp() {
         person = new Person(startEmail, startPassword);
     }
@@ -65,10 +65,11 @@ class PersonTest {
     // @EnumSource(TestEnum.class) // источник данных для перечислений
     @ParameterizedTest // источник тестовых данных - метод
     @MethodSource("generateDataForEmailTest")
-    void testIncorrectEmailSetParamMethodSource(String incorrectEmail){
+    void testIncorrectEmailSetParamMethodSource(String incorrectEmail) {
         person.setEmail(incorrectEmail);
         Assertions.assertEquals(startEmail, person.getEmail());
     }
+
     static Stream<String> generateDataForEmailTest() { // метод возвращающий поток данных для теста
         return Stream.of("inva!lid@test.de", "invalid@te*st.de",
                 "inva lid@test.de", "invalid@test.d#e", "invalid@te$st.de");
@@ -79,7 +80,8 @@ class PersonTest {
 
     @Disabled
     @ParameterizedTest
-    @ValueSource(ints = {1,2,3}) //массив интов в качестве тестовых данных
+    @ValueSource(ints = {1, 2, 3})
+        //массив интов в качестве тестовых данных
     void testIntsParam(int value) {
         Assertions.assertTrue(value <= 2);
         Assertions.assertFalse(value < 2);
@@ -87,18 +89,35 @@ class PersonTest {
 
     @Disabled
     @ParameterizedTest
-    @CsvSource({"apple, 1, true", "banana, 4, false", "cherry, 5, false"}) //источник данных в формате CSV (Comma-Separated-Values)
-    void testCSVsource(String fruit, int count, boolean flag){
+    @CsvSource({"apple, 1, true", "banana, 4, false", "cherry, 5, false"})
+        //источник данных в формате CSV (Comma-Separated-Values)
+    void testCSVsource(String fruit, int count, boolean flag) {
         Assertions.assertNotNull(fruit);
-        Assertions.assertTrue(count> 0);
+        Assertions.assertTrue(count > 0);
         Assertions.assertFalse(flag);
     }
-//    @ParameterizedTest
+
+    //    @ParameterizedTest
 //    @CsvFileSource(resources = "/data.csv") // источник данных файл в формате CSV
 //    void testDataFromFile(String fruit, int count, boolean flag){
 //        Assertions.assertNotNull(fruit);
 //        Assertions.assertTrue(count> 0);
 //        Assertions.assertFalse(flag);
 //    }
+    @ParameterizedTest
+    @MethodSource("dataForTestStreams")
+    void exampleGetValuesByStream(int[] ints, String str, boolean isActive) {
+        System.out.println(Arrays.toString(ints));
+        System.out.println(str + " : " + isActive);
+        // System.out.println(person);
+    }
+
+    static Stream<Arguments> dataForTestStreams() {
+        return Stream.of(
+                Arguments.of(new int[]{1, 2, 3, 5, 6}, "Hello", true),
+                Arguments.of(new int[]{8, 12, 57, 102}, "java", false, null)
+               // Arguments.of(new int[]{8, 12, 57, 102}, new int[]{8, 12, 57, 102})
+        );
+    }
 
 }

@@ -30,9 +30,9 @@ public class ArrayListApp {
         myArrayList.add(7);
         myArrayList.add(8);
 
-        int removedValue = myArrayList.removeByIndex(2);
-        System.out.println("Удаленное значение: " + removedValue);
-        System.out.println("Содержимое списка: " + myArrayList);
+       // int removedValue = myArrayList.removeByIndex(2);
+       // System.out.println("Удаленное значение: " + removedValue);
+       // System.out.println("Содержимое списка: " + myArrayList);
 
         System.out.println("Размер: " + myArrayList.size());
         System.out.println("Индекс числа 2: " + myArrayList.indexOf(2));
