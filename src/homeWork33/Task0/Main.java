@@ -1,4 +1,5 @@
 package homeWork33.Task0;
+
 /*Task
 Смоделировать предметную область "Телевизор"
 Классы:
@@ -19,18 +20,18 @@ public class Main {
         Program program1 = new Program("Про животных");
         Program program2 = new Program("КИНО");
         Program program3 = new Program("БАЛЕТ");
-        Program[] channel1Programs = { program1, program2, program3 };
+        Program[] channel1Programs = {program1, program2, program3};
 
-        Channel channel1 = new Channel(1, channel1Programs);
+        Channel bbc = new Channel(1,"BBC", channel1Programs);
 
         Program program4 = new Program("В мире интересного");
         Program program5 = new Program("Новости");
         Program program6 = new Program("ПРОИСШЕСТВИЯ");
-        Program[] channel2Programs = { program4, program5, program6 };
+        Program[] channel2Programs = {program4, program5, program6};
 
-        Channel channel2 = new Channel(2, channel2Programs);
+        Channel cnn = new Channel(2, "CNN",channel2Programs);
 
-        Channel[] channels = { channel1, channel2 };
+        Channel[] channels = {bbc, cnn};
 
         Television television = new Television(channels);
         RemoteControl remoteControl = new RemoteControl(television);
@@ -40,3 +41,4 @@ public class Main {
         remoteControl.on(3); // Несуществующий канал
     }
 }
+//Diese time wann you sprichst zwei languages in one zeit.
