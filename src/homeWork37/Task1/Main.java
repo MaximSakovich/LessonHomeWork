@@ -23,7 +23,7 @@ import java.util.Calendar;
 public class Main {
     public static void main(String[] args) {
         // Текущая дата
-        //LocalDate date = LocalDate.now();
+        LocalDate date = LocalDate.now();
         Date currentDate = new Date();
         System.out.println(currentDate);
 
