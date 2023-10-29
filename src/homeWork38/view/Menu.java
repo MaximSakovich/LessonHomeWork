@@ -56,8 +56,6 @@ public class Menu {
                 case 1: {
                     // Регистрации пользователя
                     boolean validInput = false;
-                    //String firstName = "";
-                    //String lastName = "";
                     String email = "";
                     String password = "";
 
