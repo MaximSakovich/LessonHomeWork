@@ -7,7 +7,12 @@ import homeWork38.services.OrderService;
 import homeWork38.services.ProductsService;
 import homeWork38.services.UsersService;
 import homeWork38.view.Menu;
-
+/*
+Реализовать в том же Menu функционал для добавления товаров и получения и списка
+Реализовать ProductsService
+Реализовать ProductsRepository
+Задание со звездочкой - попробуйте сделать функционал оформления заказа
+ */
 public class Main {
     public static void main(String[] args) {
 
