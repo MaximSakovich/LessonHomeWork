@@ -1,9 +1,7 @@
 package homeWork37.Task1;
 
-import java.util.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Calendar;
 
 // Task 1
 //Получить и вывести на экран:
@@ -23,16 +21,19 @@ import java.util.Calendar;
 public class Main {
     public static void main(String[] args) {
         // Текущая дата
-        LocalDate date = LocalDate.now();
-        Date currentDate = new Date();
-        System.out.println(currentDate);
+        LocalDate currentDate = LocalDate.now();
+        System.out.println("Текущая дата: " + currentDate);
 
-        // Текущий год, месяц и день
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH) + 1;
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        System.out.println("Текущий год, месяц и день: " + year + "-" + month + "-" + day);
+        // Получение текущего года, месяца и дня
+        int currentYear = currentDate.getYear();
+        int currentMonth = currentDate.getMonthValue();
+        int currentDay = currentDate.getDayOfMonth();
+
+        // Вывод текущего года, месяца и дня
+        System.out.println("Текущий год: " + currentYear);
+        System.out.println("Текущий месяц: " + currentMonth);
+        System.out.println("Текущий день: " + currentDay);
+        System.out.println("Текущий год, месяц и день: " + currentYear + "-" + currentMonth + "-" + currentDay);
 
         // Создание и вывод даты (например, день рождения)
         LocalDate birthday = LocalDate.of(1973, 11, 5);

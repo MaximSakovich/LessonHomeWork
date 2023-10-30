@@ -109,7 +109,7 @@ public class Menu {
                             price = Double.parseDouble(priceInput);
                             validPriceInput = true;
                         } catch (NumberFormatException e) {
-                            System.err.println("Неверный формат цены. Пожалуйста, введите корректную цену в формате xx.xx.");
+                            System.err.println("Неверный формат цены. Пожалуйста, введите корректную цену в формате xx.xx");
                         }
                     }
                     System.out.println("Введите описание товара: ");

@@ -1,44 +1,23 @@
 package homeWork37.Task2;
 
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.time.temporal.ChronoUnit;
 
-public class MyArrayList<T> {
-    private T[] elements;
-
+public class MyArrayList {
     // Метод для получения количества дней между самой ранней и поздней датами
-    public long getDaysBetweenDates(T[] dates) {
+    public static long getDaysBetweenDates(LocalDate[] dates) {
         if (dates.length == 0) {
             return 0;
         }
-        if (!(dates[0] instanceof LocalDate)) {
-            throw new IllegalArgumentException("Массив должен содержать только LocalDate объекты.");
-        }
-        LocalDate minDate = (LocalDate) dates[0];
-        LocalDate maxDate = (LocalDate) dates[0];
-        for (T date : dates) {
-            LocalDate currentDate = (LocalDate) date;
-            if (currentDate.isBefore(minDate)) {
-                minDate = currentDate;
-            } else if (currentDate.isAfter(maxDate)) {
-                maxDate = currentDate;
+        LocalDate minDate = dates[0];
+        LocalDate maxDate = dates[0];
+        for (LocalDate date : dates) {
+            if (date.isBefore(minDate)) {
+                minDate = date;
+            } else if (date.isAfter(maxDate)) {
+                maxDate = date;
             }
         }
-        return maxDate.toEpochDay() - minDate.toEpochDay();
-    }
-
-    @Override
-    public String toString() {
-        return "MyArrayList{" +
-                "elements=" + Arrays.toString(elements) +
-                '}';
-    }
-
-    public T[] getElements() {
-        return elements;
-    }
-
-    public void setElements(T[] elements) {
-        this.elements = elements;
+        return minDate.until(maxDate, ChronoUnit.DAYS);
     }
 }
