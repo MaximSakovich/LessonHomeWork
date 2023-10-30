@@ -3,7 +3,7 @@ package homeWork37.Task2;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class MyArrayList {
+public class DateUtil {
     // Метод для получения количества дней между самой ранней и поздней датами
     public static long getDaysBetweenDates(LocalDate[] dates) {
         if (dates.length == 0) {

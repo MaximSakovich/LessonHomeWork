@@ -14,7 +14,7 @@ public class Main {
                 LocalDate.of(2023, 10, 20),
                 LocalDate.of(2023, 10, 25)
         };
-        long differenceInDays = MyArrayList.getDaysBetweenDates(dates);
+        long differenceInDays = DateUtil.getDaysBetweenDates(dates);
         System.out.println("Difference in days: " + differenceInDays);
     }
 }
