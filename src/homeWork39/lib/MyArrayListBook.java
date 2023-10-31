@@ -29,15 +29,24 @@ public class MyArrayListBook<T> implements Iterable<T> {
         };
     }
 
+    // Метод добавления элемента в массив
     public void add(T element) {
-        if (size < DEFAULT_CAPACITY) {
-            array[size] = element;
-            size++;
-        } else {
-            // Логика увеличения массива или генерации ошибки при переполнении
+        if (size == array.length) {
+            increaseCapacity();
         }
+        array[size] = element;
+        size++;
     }
 
+    // Метод увеличивает емкость внутреннего массива вдвое.
+    private void increaseCapacity() {
+        int newCapacity = array.length * 2;
+        Object[] newArray = new Object[newCapacity];
+        System.arraycopy(array, 0, newArray, 0, array.length);
+        array = newArray;
+    }
+
+    //Метод удаления элемента из массива
     public void remove(T element) {
         int index = -1;
         for (int i = 0; i < size; i++) {
@@ -47,18 +56,18 @@ public class MyArrayListBook<T> implements Iterable<T> {
             }
         }
         if (index != -1) {
-            for (int i = index; i < size - 1; i++) {
-                array[i] = array[i + 1];
-            }
+            System.arraycopy(array, index + 1, array, index, size - index - 1);
             array[size - 1] = null;
             size--;
         } else {
             // Логика обработки, если элемент не найден
         }
     }
+
     public boolean isEmpty() {
         return size == 0;
     }
+
     public T get(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size " + size);

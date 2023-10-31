@@ -8,28 +8,30 @@ import homeWork39.repository.ReaderRepository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 
 public class BookService {
     private BookRepository bookRepository;
     private ReaderRepository readerRepository;
 
-    public BookService() {
-        this.bookRepository = new BookRepository();
-        this.readerRepository = new ReaderRepository();
+    public BookService(BookRepository bookRepository, ReaderRepository readerRepository) {
+        this.bookRepository = bookRepository;
+        this.readerRepository = readerRepository;
     }
 
+    // Метод взятия книги в библиотеке с фиксацией даты
     public void borrowBook(Reader reader, Book book, String date) {
         if (book.isTaken()) {
             System.out.println("Книга уже взята другим читателем.");
         } else {
-            // Логика взятия книги в библиотеке с фиксацией даты
             book.setTaken(true);
             book.setTakenDate(date);
         }
     }
 
+    // Метод возврата книги в библиотеку
     public void returnBook(Reader reader, Book book) {
-        // Логика возврата книги в библиотеку
         book.setTaken(false);
         book.setTakenDate("");
     }
@@ -119,15 +121,21 @@ public class BookService {
             return 0; // Если книга не взята, возвращаем 0
         }
 
-        // Здесь предполагается, что вы храните дату в виде строки, так что вам нужно преобразовать ее в LocalDate
-        String takenDateStr = book.getTakenDate();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate takenDate = LocalDate.parse(takenDateStr, formatter);
-        LocalDate currentDate = LocalDate.now();
+        // Предполагается, что дата взятия книги хранится в правильном формате "yyyy-MM-dd"
+        try {
+            String takenDateStr = book.getTakenDate();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate takenDate = LocalDate.parse(takenDateStr, formatter);
+            LocalDate currentDate = LocalDate.now();
 
-        // Используйте метод until для вычисления количества дней между двумя датами
-        return takenDate.until(currentDate).getDays();
+            // Используйте метод until для вычисления количества дней между двумя датами
+            return ChronoUnit.DAYS.between(takenDate, currentDate);
+        } catch (DateTimeParseException e) {
+            System.out.println("Ошибка разбора даты: " + e.getMessage());
+            return 0; // Вернуть 0 в случае ошибки парсинга даты
+        }
     }
+
     public MyArrayListBook<Book> getAvailableBooks() {
         MyArrayListBook<Book> availableBooks = new MyArrayListBook<>();
         for (Book book : bookRepository.getAllBooks()) {

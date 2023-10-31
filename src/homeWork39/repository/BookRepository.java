@@ -7,8 +7,8 @@ public class BookRepository {
 
     private MyArrayListBook<Book> books;
 
-    public BookRepository() {
-        this.books = new MyArrayListBook<>();
+    public BookRepository(MyArrayListBook<Book> books) {
+        this.books = books;
     }
 
     public void addBook(Book book) {
@@ -25,7 +25,11 @@ public class BookRepository {
     }
 
     public MyArrayListBook<Book> getAllBooks() {
-        return books;
+        MyArrayListBook<Book> copyOfBooks = new MyArrayListBook<>();
+        for (Book book : books) {
+            copyOfBooks.add(book);
+        }
+        return copyOfBooks;
     }
 
 // метод возвращает список книг, доступных для взятия, из общего списка книг.

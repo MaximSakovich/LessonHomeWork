@@ -2,7 +2,6 @@ package homeWork39.model;
 
 
 import homeWork39.lib.MyArrayListBook;
-import homeWork39.lib.MyLinkedListReader;
 
 
 public class Reader {
@@ -11,10 +10,12 @@ public class Reader {
     private String email;
     private String username;
     private String password;
+    private Role role;
 
     private MyArrayListBook<Book> borrowedBooks;//список чтобы отслеживать книги, которые взял данный читатель.
 
-    public Reader(String firstName, String lastName, String email, String username, String password, MyArrayListBook<Book> borrowedBooks) {
+    public Reader(String firstName, String lastName, String email, String username,
+                  String password, MyArrayListBook<Book> borrowedBooks) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -82,4 +83,13 @@ public class Reader {
     public void setBorrowedBooks(MyArrayListBook<Book> borrowedBooks) {
         this.borrowedBooks = borrowedBooks;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }
+

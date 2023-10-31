@@ -2,6 +2,7 @@ package homeWork39.view;
 
 import homeWork39.model.Reader;
 import homeWork39.model.Book;
+import homeWork39.repository.ReaderRepository;
 import homeWork39.service.BookService;
 import homeWork39.service.ReaderService;
 import homeWork39.repository.BookRepository;
@@ -17,12 +18,15 @@ public class ConsoleMenu {
     private BookService bookService;
     private ReaderService readerService;
     private BookRepository bookRepository;
-    MyLinkedListReader<Reader> borrowedBooks = new MyLinkedListReader<Reader>();
+    private ReaderRepository readerRepository;
+
     MyArrayListBook<Book> availableBooks = new MyArrayListBook<>();
-    public ConsoleMenu() {
-        this.bookService = new BookService();
+
+    public ConsoleMenu(BookRepository bookRepository, ReaderRepository readerRepository) {
+        this.bookService = new BookService(bookRepository, readerRepository);
         this.readerService = new ReaderService();
-        this.bookRepository = new BookRepository();
+        this.bookRepository = bookRepository;
+        this.readerRepository = readerRepository;
     }
 
     public void showMenu() {
@@ -108,7 +112,7 @@ public class ConsoleMenu {
                     // Проверка, существует ли читатель с введенным именем
                     Reader reader = readerService.findReaderByName(firstName, lastName);
                     if (reader == null) {
-                        System.out.println("Читатель с именем и фамилией " + firstName + lastName + " не найден.");
+                        System.out.println("Читатель с именем и фамилией " + firstName +" "+ lastName + " не найден.");
                     } else {
                         // Проверка, существует ли книга с введенным названием
                         Book book = bookService.findBookByTitle(bookTitle);
@@ -124,7 +128,7 @@ public class ConsoleMenu {
                             }
 
                             bookService.borrowBook(reader, book, takenDateStr);
-                            System.out.println("Книга взята читателем: " + firstName + lastName);
+                            System.out.println("Книга взята читателем: " + firstName +" "+ lastName);
                         }
                     }
                 }
@@ -199,16 +203,15 @@ public class ConsoleMenu {
                 break;
 
                 case 8: {
+                    // Поиск книг по названию книги
                     System.out.println("Введите название книги для поиска:");
                     String bookTitle = scanner.nextLine();
-
                     MyArrayListBook<Book> foundBooks = bookService.findBooksByTitle(bookTitle);
-
-                    if(foundBooks.isEmpty()) {
+                    if (foundBooks.isEmpty()) {
                         System.out.println("Книги с названием " + bookTitle + " не найдены.");
                     } else {
                         System.out.println("Найденные книги по запросу " + bookTitle + ":");
-                        for(Book book : foundBooks) {
+                        for (Book book : foundBooks) {
                             System.out.println(book.toString());
                         }
                     }
@@ -231,14 +234,14 @@ public class ConsoleMenu {
 
                 case 10: {
                     //10. Авторизация пользователей
-                    System.out.println("Введите имя пользователя:");
+                    System.out.println("Введите логин:");
                     String username = scanner.nextLine();
                     System.out.println("Введите пароль:");
                     String password = scanner.nextLine();
                     if (readerService.authenticate(username, password)) {
                         System.out.println("Авторизация прошла успешно.");
                     } else {
-                        System.out.println("Неверное имя пользователя или пароль.");
+                        System.out.println("Неверный логин или пароль.");
                     }
                 }
                 break;
@@ -259,7 +262,7 @@ public class ConsoleMenu {
 
                         System.out.println("Введите email: ");
                         email = scanner.nextLine();
-                      Reader newReader = new Reader(firstname, lastname, email, username, password, availableBooks);
+                        Reader newReader = new Reader(firstname, lastname, email, username, password, availableBooks);
 
                         if (!readerService.isEmailValid(email)) {
                             System.err.println("Неверный формат электронной почты. " +
@@ -273,7 +276,7 @@ public class ConsoleMenu {
                     while (!validInput) {
                         System.out.println("Придумайте корректный пароль пользователя: ");
                         password = scanner.nextLine();
-                      Reader newReader = new Reader(firstname, lastname, email, username, password, availableBooks);
+                        Reader newReader = new Reader(firstname, lastname, email, username, password, availableBooks);
                         newReader.setPassword(password);
                         if (!readerService.isPasswordValid(password)) {
                             System.err.println("Попробуйте еще раз!!!");
@@ -287,7 +290,7 @@ public class ConsoleMenu {
 
                 case 12: {
                     //12. Список книг, которые сейчас у пользователя
-                    System.out.println("Введите имя пользователя:");
+                    System.out.println("Введите свой логин:");
                     String username = scanner.nextLine();
                     Reader reader = readerService.findReaderByUsername(username);
                     if (reader != null) {
@@ -298,7 +301,9 @@ public class ConsoleMenu {
                             System.out.println("Книги, которые сейчас у пользователя " +
                                     reader.getFirstName() + " " + reader.getLastName() + ":");
                             for (Book book : borrowedBooks) {
-                                System.out.println(book);
+                                if (book.getReader() != null) {
+                                    System.out.println(book);
+                                }
                             }
                         }
                     } else {
@@ -308,8 +313,8 @@ public class ConsoleMenu {
                 }
 
                 case 13: {
-                    // Вывести права доступа у пользователей
-                  //  readerService.displayUserPermissions();
+                    // 13. Права доступа у пользователей, в зависимости от роли
+                    readerService.displayUserPermissions();
                 }
                 break;
 
@@ -332,7 +337,8 @@ public class ConsoleMenu {
                 break;
 
                 case 15: {
-                    System.out.println("Введите имя пользователя:");
+                    //15. Посмотреть у кого находится книга, если занята
+                    System.out.println("Введите свой логин:");
                     String username = scanner.nextLine();
                     Reader reader = readerService.findReaderByUsername(username);
                     if (reader != null) {
@@ -356,6 +362,7 @@ public class ConsoleMenu {
                 break;
 
                 case 16: {
+                    //16. Дата, когда была книга взята на прокат
                     System.out.println("Введите название книги:");
                     String bookTitle = scanner.nextLine();
                     Book book = bookService.findBookByTitle(bookTitle);
@@ -407,28 +414,44 @@ public class ConsoleMenu {
 
     public static void main(String[] args) {
         MyArrayListBook<Book> availableBooks = new MyArrayListBook<>();
+        BookRepository bookRepository = new BookRepository(availableBooks);
+        ReaderRepository readerRepository = new ReaderRepository();
+
         // Создание экземпляров книг
-        Book book1 = new Book("Название книги 1", "Автор 1", 1, false);
-        Book book2 = new Book("Название книги 2", "Автор 2", 2, false);
-        Book book3 = new Book("Название книги 3", "Автор 3", 3, false);
-        // Добавьте остальные книги таким же образом
+        Book book1 = new Book("Татуировщик Аушвица", "Гизер Моррис", 1, false);
+        Book book2 = new Book("На западном фронте без перемен", "Эрих Мария Ремарк", 2, false);
+        Book book3 = new Book("Инферно", "Дэн Браун", 3, false);
+        Book book4 = new Book("Маркетинг от А до Я", "Филлип Котлер", 4, false);
+        Book book5 = new Book("Четвертая промышленная революция", "Клаус Шваб", 5, false);
+        Book book6 = new Book("Уоррен Баффет - Лучший инвестор мира", "Элис Шрёдер", 6, false);
+        Book book7 = new Book("21 урок для 21 века", "Ювал Ной Харари", 7, false);
+        Book book8 = new Book("Степной волк", "Герман Гессе", 8, false);
+        Book book9 = new Book("Трудно быть богом", "Аркадий и Борис Стругацкие", 9, false);
+        Book book10 = new Book("48 Законов власти", "Роберт Грин", 10, false);
 
         availableBooks.add(book1);
         availableBooks.add(book2);
         availableBooks.add(book3);
-       //ReaderRepository readerRepository  = new ReaderRepository();
-     // BookRepository bookRepository1  = new BookRepository();
-
-       ///ReaderService readerService1 = new ReaderService();
-       // BookService bookService1 = new BookService();
-
-
-
-
+        availableBooks.add(book4);
+        availableBooks.add(book5);
+        availableBooks.add(book6);
+        availableBooks.add(book7);
+        availableBooks.add(book8);
+        availableBooks.add(book9);
+        availableBooks.add(book10);
 
         //availableBooks.remove(book1);
-        ConsoleMenu consoleMenu = new ConsoleMenu();
+        ConsoleMenu consoleMenu = new ConsoleMenu(bookRepository, readerRepository);
         consoleMenu.showMenu();
+
+        // Создание роли и читателя
+        //  Role adminRole = new Role("Администратор");
+        //  Reader adminReader = new Reader();
+        // Установка роли для читателя
+        //    adminReader.setRole(adminRole);
+        // Добавление читателя в репозиторий
+        //  readerRepository.addReader(adminReader);
+
     }
 }
 

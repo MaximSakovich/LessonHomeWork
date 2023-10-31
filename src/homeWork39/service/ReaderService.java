@@ -6,7 +6,6 @@ import homeWork39.model.Reader;
 import homeWork39.repository.ReaderRepository;
 import homeWork39.lib.MyLinkedListReader;
 
-
 public class ReaderService {
     private ReaderRepository readerRepository;
     Role roleName = new Role("some_role");
@@ -35,7 +34,6 @@ public class ReaderService {
         readerRepository.addReader(newReader);
     }
 
-
     public boolean isReaderExistsByEmail(String email) {
         for (Reader reader : readerRepository.getAllReaders()) {
             if (reader.getEmail().equals(email)) {
@@ -44,8 +42,8 @@ public class ReaderService {
         }
         return false;
     }
-/*
-      public Reader[] findAllReaders() {
+
+  /*    public Reader[] findAllReaders() {
     return readerRepository.getAllReaders().toArray(new Reader[0]);
       }
 
@@ -57,8 +55,8 @@ public class ReaderService {
             System.err.println("Требования к паролю: ");
             System.err.println("Длина >= 8, мин 1 цифра, маленькая буква, большая буква и спец.символ !%$@&");
         }
-    }
-*/
+    } */
+
     public boolean isEmailValid(String email) {
 
         int indexAt = email.indexOf('@');
@@ -102,7 +100,6 @@ public class ReaderService {
         return readerRepository.getAllReaders();
     }
 
-
     public boolean authenticate(String username, String password) {
         for (Reader reader : readerRepository.getAllReaders()) {
             if (reader.getUsername().equals(username) && reader.getPassword().equals(password)) {
@@ -112,8 +109,8 @@ public class ReaderService {
         return false;
     }
 
-  /*  public void displayUserPermissions() {
-        // Логика для отображения прав доступа у пользователей
+   public void displayUserPermissions() {
+        // Метод для отображения прав доступа у пользователей
         for (Reader reader : readerRepository.getAllReaders()) {
             Role role = reader.getRole();
             if (role != null) {
@@ -125,8 +122,6 @@ public class ReaderService {
             }
         }
     }
-
-*/
 
     public Reader findReaderByUsername(String username) {
         for (Reader reader : readerRepository.getAllReaders()) {
