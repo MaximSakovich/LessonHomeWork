@@ -301,7 +301,7 @@ public class ConsoleMenu {
                             System.out.println("Книги, которые сейчас у пользователя " +
                                     reader.getFirstName() + " " + reader.getLastName() + ":");
                             for (Book book : borrowedBooks) {
-                                if (book.getReader() != null) {
+                                if (book != null && book.getReader() != null) {
                                     System.out.println(book);
                                 }
                             }

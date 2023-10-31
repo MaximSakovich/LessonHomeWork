@@ -14,10 +14,10 @@ public class BookRepository {
     public void addBook(Book book) {
         books.add(book);
         System.out.println("Книга успешно добавлена в репозиторий.");
-        System.out.println("Содержимое репозитория после добавления книги:");
-        for (Book b : books) {
-            System.out.println(b);
-        }
+       // System.out.println("Содержимое репозитория после добавления книги:");
+       // for (Book b : books) {
+       //     System.out.println(b);
+       // }
     }
 
     public void removeBook(Book book) {
