@@ -12,15 +12,15 @@ public class Reader {
     private String username;
     private String password;
 
-    private MyArrayListBook<Book> availableBooks;//список чтобы отслеживать книги, которые взял данный читатель.
+    private MyArrayListBook<Book> borrowedBooks;//список чтобы отслеживать книги, которые взял данный читатель.
 
-    public Reader(String firstName, String lastName, String email, String username, String password, MyArrayListBook<Book> availableBooks) {
+    public Reader(String firstName, String lastName, String email, String username, String password, MyArrayListBook<Book> borrowedBooks) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.username = username;
         this.password = password;
-        this.availableBooks = availableBooks;
+        this.borrowedBooks = borrowedBooks;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class Reader {
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", availableBooks=" + availableBooks +
+                ", borrowedBooks=" + borrowedBooks +
                 '}';
     }
 
@@ -75,11 +75,11 @@ public class Reader {
         this.password = password;
     }
 
-    public MyArrayListBook<Book> getAvailableBooks() {
-        return availableBooks;
+    public MyArrayListBook<Book> getBorrowedBooks() {
+        return borrowedBooks;
     }
 
-    public void setAvailableBooks(MyArrayListBook<Book> availableBooks) {
-        this.availableBooks = availableBooks;
+    public void setBorrowedBooks(MyArrayListBook<Book> borrowedBooks) {
+        this.borrowedBooks = borrowedBooks;
     }
 }
