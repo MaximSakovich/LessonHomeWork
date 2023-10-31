@@ -137,7 +137,7 @@ public class ConsoleMenu {
                     System.out.println("Введите вашу фамилию:");
                     String lastName = scanner.nextLine();
                     System.out.println("Введите название книги, которую вы хотите вернуть:");
-                    String bookTitle = scanner.nextLine();
+                    String title = scanner.nextLine();
 
                     // Проверка, существует ли читатель с введенным именем
                     Reader reader = readerService.findReaderByName(firstName, lastName);
@@ -145,12 +145,12 @@ public class ConsoleMenu {
                         System.out.println("Читатель с именем " + firstName + lastName + " не найден.");
                     } else {
                         // Проверка, существует ли книга с введенным названием
-                        Book book = bookService.findBookByTitle(bookTitle);
+                        Book book = bookService.findBookByTitle(title);
                         if (book == null) {
-                            System.out.println("Книга с названием " + bookTitle + " не найдена.");
+                            System.out.println("Книга с названием " + title + " не найдена.");
                         } else {
                             bookService.returnBook(reader, book);
-                            System.out.println("Книга возвращена в библиотеку: " + bookTitle);
+                            System.out.println("Книга возвращена в библиотеку: " + title);
                         }
                     }
                 }

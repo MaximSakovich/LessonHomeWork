@@ -28,6 +28,7 @@ public class BookRepository {
         return books;
     }
 
+// метод возвращает список книг, доступных для взятия, из общего списка книг.
     public MyArrayListBook<Book> getAvailableBooks() {
         MyArrayListBook<Book> availableBooks = new MyArrayListBook<>();
         for (Book book : books) {
