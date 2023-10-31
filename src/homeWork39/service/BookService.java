@@ -1,0 +1,143 @@
+package homeWork39.service;
+
+import homeWork39.lib.MyArrayListBook;
+import homeWork39.model.Book;
+import homeWork39.model.Reader;
+import homeWork39.repository.BookRepository;
+import homeWork39.repository.ReaderRepository;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class BookService {
+    private BookRepository bookRepository;
+    private ReaderRepository readerRepository;
+
+    public BookService() {
+        this.bookRepository = new BookRepository();
+        this.readerRepository = new ReaderRepository();
+    }
+
+    public void borrowBook(Reader reader, Book book, String date) {
+        if (book.isTaken()) {
+            System.out.println("Книга уже взята другим читателем.");
+        } else {
+            // Логика взятия книги в библиотеке с фиксацией даты
+            book.setTaken(true);
+            book.setTakenDate(date);
+        }
+    }
+
+    public void returnBook(Reader reader, Book book) {
+        // Логика возврата книги в библиотеку
+        book.setTaken(false);
+        book.setTakenDate("");
+    }
+
+    public MyArrayListBook<Book> findBooksByTitle(String title) {
+        MyArrayListBook<Book> booksByTitle = new MyArrayListBook<>();
+        for (Book book : bookRepository.getAllBooks()) {
+            if (book.getTitle().equals(title)) {
+                booksByTitle.add(book);
+            }
+        }
+        return booksByTitle;
+    }
+
+    public MyArrayListBook<Book> getBooksByAuthor(String author) {
+        MyArrayListBook<Book> booksByAuthor = new MyArrayListBook<>();
+        for (Book book : bookRepository.getAllBooks()) {
+            if (book.getAuthor().equals(author)) {
+                booksByAuthor.add(book);
+            }
+        }
+        return booksByAuthor;
+    }
+
+    public MyArrayListBook<Book> searchBooksByTitle(String title) {
+        MyArrayListBook<Book> booksByTitle = new MyArrayListBook<>();
+        for (Book book : bookRepository.getAllBooks()) {
+            if (book.getTitle().contains(title)) {
+                booksByTitle.add(book);
+            }
+        }
+        return booksByTitle;
+    }
+
+    // Добавленные методы
+    public Book findBookByTitle(String title) {
+        for (Book book : bookRepository.getAllBooks()) {
+            if (book.getTitle().equals(title)) {
+                return book;
+            }
+        }
+        return null;
+    }
+
+    public Book findBookById(int id) {
+        for (Book book : bookRepository.getAllBooks()) {
+            if (book.getId() == id) {
+                return book;
+            }
+        }
+        return null;
+    }
+    public MyArrayListBook<Book> getBorrowedBooks() {
+        MyArrayListBook<Book> borrowedBooks = new MyArrayListBook<>();
+        for (Book book : bookRepository.getAllBooks()) {
+            if (book.isTaken()) {
+                borrowedBooks.add(book);
+            }
+        }
+        return borrowedBooks;
+    }
+
+    public MyArrayListBook<Book> getBorrowedBooks(Reader reader) {
+        MyArrayListBook<Book> borrowedBooks = new MyArrayListBook<>();
+        for (Book book : bookRepository.getAllBooks()) {
+            if (book.isTaken() && book.getReader().equals(reader)) {
+                borrowedBooks.add(book);
+            }
+        }
+        return borrowedBooks;
+    }
+
+    public void editBookInfo(Book book, String newTitle, String newAuthor) {
+        book.setTitle(newTitle);
+        book.setAuthor(newAuthor);
+        System.out.println("Информация о книге успешно отредактирована.");
+    }
+    public void changeBorrowDate(Book book, String date) {
+        book.setTakenDate(date);
+    }
+    public void changeBorrowDate2(Book book, String newDate) {
+        book.setTakenDate(newDate);
+    }
+
+    public long getDaysBookHasBeenTaken(Book book) {
+        if (!book.isTaken()) {
+            return 0; // Если книга не взята, возвращаем 0
+        }
+
+        // Здесь предполагается, что вы храните дату в виде строки, так что вам нужно преобразовать ее в LocalDate
+        String takenDateStr = book.getTakenDate();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate takenDate = LocalDate.parse(takenDateStr, formatter);
+        LocalDate currentDate = LocalDate.now();
+
+        // Используйте метод until для вычисления количества дней между двумя датами
+        return takenDate.until(currentDate).getDays();
+    }
+    public MyArrayListBook<Book> getAvailableBooks() {
+        MyArrayListBook<Book> availableBooks = new MyArrayListBook<>();
+        for (Book book : bookRepository.getAllBooks()) {
+            if (!book.isTaken()) {
+                availableBooks.add(book);
+            }
+        }
+        return availableBooks;
+    }
+    public MyArrayListBook<Book> getAllBooks() {
+        return bookRepository.getAllBooks();
+    }
+}

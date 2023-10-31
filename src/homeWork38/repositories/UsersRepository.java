@@ -1,9 +1,10 @@
 package homeWork38.repositories;
 
+
 import homeWork38.models.User;
 
 public class UsersRepository {
-    private static final int MAX_USERS_COUNT = 10;
+    private static final int MAX_USERS_COUNT = 100;
     private User[] users;
     private int usersCount;
     public UsersRepository() {
