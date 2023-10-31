@@ -2,7 +2,6 @@ package homeWork39.view;
 
 import homeWork39.model.Reader;
 import homeWork39.model.Book;
-import homeWork39.repository.ReaderRepository;
 import homeWork39.service.BookService;
 import homeWork39.service.ReaderService;
 import homeWork39.repository.BookRepository;
@@ -15,13 +14,11 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class ConsoleMenu {
-
-    MyLinkedListReader<Reader> borrowedBooks = new MyLinkedListReader<Reader>();
-    MyArrayListBook<Book> availableBooks = new MyArrayListBook<>();
     private BookService bookService;
     private ReaderService readerService;
     private BookRepository bookRepository;
-
+    MyLinkedListReader<Reader> borrowedBooks = new MyLinkedListReader<Reader>();
+    MyArrayListBook<Book> availableBooks = new MyArrayListBook<>();
     public ConsoleMenu() {
         this.bookService = new BookService();
         this.readerService = new ReaderService();
@@ -419,10 +416,10 @@ public class ConsoleMenu {
         availableBooks.add(book1);
         availableBooks.add(book2);
         availableBooks.add(book3);
-        ReaderRepository readerRepository  = new ReaderRepository();
-       // BookRepository bookRepository1 = new BookRepository();
+       //ReaderRepository readerRepository  = new ReaderRepository();
+     // BookRepository bookRepository1  = new BookRepository();
 
-       // ReaderService readerService1 = new ReaderService();
+       ///ReaderService readerService1 = new ReaderService();
        // BookService bookService1 = new BookService();
 
 
