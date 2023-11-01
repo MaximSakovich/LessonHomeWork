@@ -223,6 +223,12 @@ case 3: {
         //        this.isTaken = true;
         //        this.takenDate = takenDate;
         //    }
-
+@Test
+    void toArray() {
+        List<Integer> items = Arrays.asList(1, 2, 3, 4, 5);
+        Integer[] expectedArray = new Integer[]{1, 2, 3, 4, 5};
+        Integer[] resultArray = myLinkedListReader.toArray(items);
+        assertArrayEquals(expectedArray, resultArray);
+    }
 
  */
