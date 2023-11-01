@@ -230,5 +230,16 @@ case 3: {
         Integer[] resultArray = myLinkedListReader.toArray(items);
         assertArrayEquals(expectedArray, resultArray);
     }
+ @Test
+    void findBooksByTitle() {
+        // Подготовка данных
+        Book book1 = new Book(1, "Title", "Author");
+        Book book2 = new Book(2, "Title", "Another Author");
+        bookRepository.addBook(book1);
+        bookRepository.addBook(book2);
 
+        // Поиск книг по названию
+        MyArrayListBook<Book> result = bookService.findBooksByTitle("Title");
+        assertEquals(2, result.size());
+    }
  */

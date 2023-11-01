@@ -19,6 +19,10 @@ public class Book {
         this.isTaken = isTaken;
     }
 
+    public Book(int i, String title, String author) {
+    }
+
+
     @Override
     public String toString() {
         return "Book{" +

@@ -7,6 +7,10 @@ import homeWork39.repository.ReaderRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BookServiceTest {
@@ -44,6 +48,27 @@ class BookServiceTest {
         bookService.getAllBooks().add(book);
         bookService.changeBorrowDate2(book, "2023-11-01");
         assertEquals("2023-11-01", book.getTakenDate());
+    }
+    @Test
+    void getDaysBookHasBeenTaken_validDate() {
+        String takenDateStr = "2023-10-20";
+        Book book = new Book(1, "Title", "Author");
+        book.setTaken(true);
+        book.setTakenDate(takenDateStr);
+
+        // Вычисление количества дней, которое книга находится в аренде
+        long result = bookService.getDaysBookHasBeenTaken(book);
+        LocalDate currentDate = LocalDate.now();
+        LocalDate takenDate = LocalDate.parse(takenDateStr);
+        long expectedDays = ChronoUnit.DAYS.between(takenDate, currentDate);
+        assertEquals(expectedDays, result);
+    }
+
+    @Test
+    void getAvailableBooks_emptyRepository() {
+        // Проверка, что метод возвращает пустой список, если нет доступных книг
+        MyArrayListBook<Book> result = bookService.getAvailableBooks();
+        assertTrue(result.isEmpty());
     }
 }
 
