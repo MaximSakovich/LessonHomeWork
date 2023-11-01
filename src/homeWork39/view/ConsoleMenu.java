@@ -78,9 +78,8 @@ public class ConsoleMenu {
                     String title = scanner.nextLine();
                     System.out.println("Введите автора книги:");
                     String author = scanner.nextLine();
-                    // Создайте новый экземпляр книги и добавьте его в список доступных книг
                     Book newBook = new Book(title, author, bookRepository.getAllBooks().size() + 1, false);
-                    bookRepository.addBook(newBook); // Добавьте метод добавления книги в ваш репозиторий
+                    bookRepository.addBook(newBook);
                     System.out.println("Книга добавлена: " + newBook);
                 }
                 break;
@@ -296,7 +295,7 @@ public class ConsoleMenu {
                     String username = scanner.nextLine();
                     Reader reader = readerService.findReaderByUsername(username);
                     if (reader != null) {
-                        MyArrayListBook<Book> borrowedBooks = bookService.getBorrowedBooks();
+                        MyArrayListBook<Book> borrowedBooks = bookService.getBorrowedBooks(reader);
                         if (borrowedBooks.isEmpty()) {
                             System.out.println("У данного пользователя нет взятых книг.");
                         } else {
