@@ -1,6 +1,6 @@
 package homeWork39.model;
 
-import java.util.Date;
+import java.util.Objects;
 
 public class Book {
     private String title;
@@ -18,6 +18,12 @@ public class Book {
         this.id = id;
         this.isTaken = isTaken;
     }
+
+    //    public void issueBook(Reader reader, String takenDate) {
+        //        this.reader = reader;
+        //        this.isTaken = true;
+        //        this.takenDate = takenDate;
+        //    }
 
     @Override
     public String toString() {
@@ -75,5 +81,20 @@ public class Book {
 
   public void setReader(Reader reader) {
    this.reader = reader;
+    }
+
+    // Переопределение метода equals для сравнения объектов
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Book book = (Book) obj;
+        return id == book.id;
+    }
+
+    // Переопределение метода hashCode для правильной работы с коллекциями
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -27,6 +27,7 @@ public class BookService {
         } else {
             book.setTaken(true);
             book.setTakenDate(date);
+            book.setReader(reader);
         }
     }
 

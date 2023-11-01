@@ -3,6 +3,8 @@ package homeWork39.model;
 
 import homeWork39.lib.MyArrayListBook;
 
+import java.util.Objects;
+
 
 public class Reader {
     private String firstName;
@@ -87,6 +89,21 @@ public class Reader {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    // Переопределение метода equals для сравнения объектов
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Reader reader = (Reader) obj;
+        return Objects.equals(username, reader.username);
+    }
+
+    // Переопределение метода hashCode для правильной работы с коллекциями
+    @Override
+    public int hashCode() {
+        return Objects.hash(username);
     }
 }
 

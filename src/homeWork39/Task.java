@@ -87,4 +87,39 @@ public class Main {
 
 
 }
-*/
+case 3: {
+                    // 3. Взятие книги из библиотеки с фиксацией даты
+                    System.out.println("Введите ваше имя:");
+                    String firstName = scanner.nextLine();
+                    System.out.println("Введите вашу фамилию:");
+                    String lastName = scanner.nextLine();
+                    System.out.println("Введите название книги, которую вы хотите взять:");
+                    String bookTitle = scanner.nextLine();
+                    System.out.println("Введите дату в формате yyyy-MM-dd:");
+                    String takenDateStr = scanner.nextLine();
+
+                    // Проверка, существует ли читатель с введенным именем
+                    Reader reader = readerService.findReaderByName(firstName, lastName);
+                    if (reader == null) {
+                        System.out.println("Читатель с именем и фамилией " + firstName + " " + lastName + " не найден.");
+                    } else {
+                        // Проверка, существует ли книга с введенным названием
+                        Book book = bookService.findBookByTitle(bookTitle);
+                        if (book == null) {
+                            System.out.println("Книга с названием " + bookTitle + " не найдена.");
+                        } else {
+                            LocalDate takenDate;
+                            try {
+                                takenDate = LocalDate.parse(takenDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                            } catch (DateTimeParseException e) {
+                                System.out.println("Некорректный формат даты. Введите дату в формате yyyy-MM-dd.");
+                                break;
+                            }
+                            bookService.borrowBook(reader, book, takenDateStr);
+                            System.out.println("Книга взята читателем: " + firstName + " " + lastName);
+                        }
+                    }
+                }
+                break;
+
+ */
