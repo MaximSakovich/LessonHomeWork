@@ -374,7 +374,6 @@ public class ConsoleMenu {
                             if (choice.equals("yes")) {
                                 System.out.println("Введите новую дату в формате гггг-мм-дд:");
                                 String newDate = scanner.nextLine();
-                                // Здесь ваш код должен обрабатывать новую строку с датой
                                 bookService.changeBorrowDate2(book, newDate);
                                 System.out.println("Дата изменена успешно.");
                             } else if (choice.equals("no")) {

@@ -118,21 +118,17 @@ public class BookService {
 
     public long getDaysBookHasBeenTaken(Book book) {
         if (!book.isTaken()) {
-            return 0; // Если книга не взята, возвращаем 0
+            return 0;
         }
-
-        // Предполагается, что дата взятия книги хранится в правильном формате "yyyy-MM-dd"
         try {
             String takenDateStr = book.getTakenDate();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate takenDate = LocalDate.parse(takenDateStr, formatter);
             LocalDate currentDate = LocalDate.now();
-
-            // Используйте метод until для вычисления количества дней между двумя датами
             return ChronoUnit.DAYS.between(takenDate, currentDate);
         } catch (DateTimeParseException e) {
             System.out.println("Ошибка разбора даты: " + e.getMessage());
-            return 0; // Вернуть 0 в случае ошибки парсинга даты
+            return 0;
         }
     }
 
