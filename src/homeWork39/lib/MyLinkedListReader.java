@@ -40,6 +40,13 @@ public class MyLinkedListReader<T> implements Iterable<T> {
             // Метод увеличения массива или генерации ошибки при переполнении
         }
     }
+    // Метод увеличивает емкость внутреннего массива вдвое.
+    private void increaseCapacity() {
+        int newCapacity = array.length * 2;
+        Object[] newArray = new Object[newCapacity];
+        System.arraycopy(array, 0, newArray, 0, array.length);
+        array = newArray;
+    }
 
     public void remove(T element) {
         int index = -1;

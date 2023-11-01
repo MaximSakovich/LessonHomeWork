@@ -63,7 +63,7 @@ public class MyArrayListBook<T> implements Iterable<T> {
             array[size - 1] = null;
             size--;
         } else {
-            // Логика обработки, если элемент не найден
+
         }
     }
 
