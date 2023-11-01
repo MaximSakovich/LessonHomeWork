@@ -1,8 +1,11 @@
 package homeWork39.lib;
 
+
 import java.util.Iterator;
 
 public class MyArrayListBook<T> implements Iterable<T> {
+
+    // private ArrayList<T> arrayList;
     private Object[] array;
     private int size;
     private static final int DEFAULT_CAPACITY = 100;

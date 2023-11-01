@@ -19,12 +19,6 @@ public class Book {
         this.isTaken = isTaken;
     }
 
-    //    public void issueBook(Reader reader, String takenDate) {
-        //        this.reader = reader;
-        //        this.isTaken = true;
-        //        this.takenDate = takenDate;
-        //    }
-
     @Override
     public String toString() {
         return "Book{" +

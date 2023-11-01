@@ -218,7 +218,11 @@ case 3: {
         assertEquals("Title", foundBooks.get(1).getTitle());
     }
 
-
+//    public void issueBook(Reader reader, String takenDate) {
+        //        this.reader = reader;
+        //        this.isTaken = true;
+        //        this.takenDate = takenDate;
+        //    }
 
 
  */

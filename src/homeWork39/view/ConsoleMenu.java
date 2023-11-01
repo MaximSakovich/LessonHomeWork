@@ -113,7 +113,7 @@ public class ConsoleMenu {
                             System.out.println("Книга с названием " + bookTitle + " не найдена.");
                         } else {
                             LocalDate takenDate = LocalDate.now();
-                            String takenDateStr = takenDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); // Преобразование в строку
+                            String takenDateStr = takenDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                             bookService.borrowBook(reader, book, takenDateStr);
                             System.out.println("Книга взята читателем: " + firstName + " " + lastName);
                         }
@@ -439,7 +439,6 @@ public class ConsoleMenu {
         //    adminReader.setRole(adminRole);
         // Добавление читателя в репозиторий
         //  readerRepository.addReader(adminReader);
-
     }
 }
 
