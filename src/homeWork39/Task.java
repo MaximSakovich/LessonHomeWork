@@ -242,4 +242,97 @@ case 3: {
         MyArrayListBook<Book> result = bookService.findBooksByTitle("Title");
         assertEquals(2, result.size());
     }
+    @Test
+    void searchBooksByTitle_existingTitle() {
+        // Подготовка данных
+        Book book1 = new Book(1, "Title1", "Author1");
+        Book book2 = new Book(2, "Another Title", "Author2");
+        bookRepository.addBook(book1);
+        bookRepository.addBook(book2);
+
+        // Поиск книги по части названия
+        MyArrayListBook<Book> result = bookService.searchBooksByTitle("Title");
+        assertEquals(2, result.size());
+    }
+
+    @Test
+    void searchBooksByTitle_nonExistingTitle() {
+        // Подготовка данных
+        Book book1 = new Book(1, "Title1", "Author1");
+        Book book2 = new Book(2, "Title2", "Author2");
+        bookRepository.addBook(book1);
+        bookRepository.addBook(book2);
+
+        // Поиск книги по части названия, которой нет
+        MyArrayListBook<Book> result = bookService.searchBooksByTitle("Nonexistent Title");
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void getBooksByAuthor_existingAuthor() {
+        // Подготовка данных
+        Book book1 = new Book(1, "Title1", "Author");
+        Book book2 = new Book(2, "Title2", "Another Author");
+        bookRepository.addBook(book1);
+        bookRepository.addBook(book2);
+
+        // Получение книг по имени автора
+        MyArrayListBook<Book> result = bookService.getBooksByAuthor("Author");
+        assertEquals(1, result.size());
+    }
+
+    @Test
+    void getBooksByAuthor_nonExistingAuthor() {
+        // Подготовка данных
+        Book book1 = new Book(1, "Title1", "Author1");
+        Book book2 = new Book(2, "Title2", "Author2");
+        bookRepository.addBook(book1);
+        bookRepository.addBook(book2);
+
+        // Получение книг по имени несуществующего автора
+        MyArrayListBook<Book> result = bookService.getBooksByAuthor("Nonexistent Author");
+        assertTrue(result.isEmpty());
+    }
+    @Test
+    void searchBooksByTitle_existingTitle() {
+        // Подготовка данных
+        Book book1 = new Book(1, "Title1", "Author1");
+        Book book2 = new Book(2, "Another Title", "Author2");
+        bookRepository.addBook(book1);
+        bookRepository.addBook(book2);
+
+        // Поиск книги по части названия
+        MyArrayListBook<Book> result = bookService.searchBooksByTitle("Title");
+        assertEquals(1, result.size());
+        assertEquals("Title1", result.get(0).getTitle());
+    }
+
+    @Test
+    void searchBooksByTitle_nonExistingTitle() {
+        // Подготовка данных
+        Book book1 = new Book(1, "Title1", "Author1");
+        Book book2 = new Book(2, "Another Title", "Author2");
+        bookRepository.addBook(book1);
+        bookRepository.addBook(book2);
+
+        // Поиск книги по части названия, которого нет
+        MyArrayListBook<Book> result = bookService.searchBooksByTitle("Nonexistent");
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void getBooksByAuthor_existingAuthor() {
+        // Подготовка данных
+        Book book1 = new Book(1, "Title1", "Author1");
+        Book book2 = new Book(2, "Title2", "Author2");
+        bookRepository.addBook(book1);
+        bookRepository.addBook(book2);
+
+        // Получение списка книг по автору
+        MyArrayListBook<Book> result = bookService.getBooksByAuthor("Author1");
+        assertEquals(1, result.size());
+        assertEquals("Author1", result.get(0).getAuthor());
+    }
  */
+
+
