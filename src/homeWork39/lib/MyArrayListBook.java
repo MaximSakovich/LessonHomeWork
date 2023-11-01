@@ -98,8 +98,7 @@ public class MyArrayListBook<T> implements Iterable<T> {
         this.size = size;
     }
 
-    public int size() {
-        return size;
+    public int size() {return size;
     }
 }
 

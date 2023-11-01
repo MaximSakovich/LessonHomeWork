@@ -141,7 +141,7 @@ public class ConsoleMenu {
                             System.out.println("Книга с названием " + title + " не найдена.");
                         } else {
                             bookService.returnBook(reader, book);
-                            System.out.println("Книга" + title + "возвращена в библиотеку");
+                            System.out.println("Книга " + title + " возвращена в библиотеку");
                         }
                     }
                 }
