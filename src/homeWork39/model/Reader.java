@@ -71,9 +71,7 @@ public class Reader {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setPassword(String password) {this.password = password;}
 
     public MyArrayListBook<Book> getBorrowedBooks() {
         return borrowedBooks;

@@ -1,5 +1,7 @@
 package homeWork39.lib;
 
+import homeWork39.model.Reader;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,7 +37,7 @@ public class MyLinkedListReader<T> implements Iterable<T> {
             array[size] = element;
             size++;
         } else {
-            // Логика увеличения массива или генерации ошибки при переполнении
+            // Метод увеличения массива или генерации ошибки при переполнении
         }
     }
 
@@ -54,7 +56,7 @@ public class MyLinkedListReader<T> implements Iterable<T> {
             array[size - 1] = null;
             size--;
         } else {
-            // Логика обработки, если элемент не найден
+            // Метод обработки, если элемент не найден
         }
     }
 

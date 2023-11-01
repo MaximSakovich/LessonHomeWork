@@ -6,6 +6,8 @@ import homeWork39.model.Reader;
 import homeWork39.repository.ReaderRepository;
 import homeWork39.lib.MyLinkedListReader;
 
+import java.util.List;
+
 public class ReaderService {
     private ReaderRepository readerRepository;
     Role roleName = new Role("some_role");
@@ -27,10 +29,10 @@ public class ReaderService {
         return null;
     }
 
+    //Метод добавления нового пользователя в репозиторий
     public void registerUser(String firstname, String lastname, String email, String username, String password) {
        // Role roleName = new Role("some_role");
         Reader newReader = new Reader(firstname, lastname, email, username, password, new MyArrayListBook<>());
-        // Добавление нового пользователя в репозиторий
         readerRepository.addReader(newReader);
     }
 
@@ -43,20 +45,11 @@ public class ReaderService {
         return false;
     }
 
-  /*    public Reader[] findAllReaders() {
-    return readerRepository.getAllReaders().toArray(new Reader[0]);
+  public Reader[] findAllReaders() {
+    return readerRepository.getAllReaders().toArray(List.of(new Reader[0]));
       }
 
-    public void setPassword(String password) {
-        if (isPasswordValid(password)) {
-            this.password = password;
-        } else {
-            System.err.println("Неверный формат пароля. Пожалуйста, введите корректный пароль.");
-            System.err.println("Требования к паролю: ");
-            System.err.println("Длина >= 8, мин 1 цифра, маленькая буква, большая буква и спец.символ !%$@&");
-        }
-    } */
-
+//Метод проверки емейла
     public boolean isEmailValid(String email) {
 
         int indexAt = email.indexOf('@');
@@ -73,6 +66,7 @@ public class ReaderService {
         return true;
     }
 
+//Метод проверки пароля
     public boolean isPasswordValid(String password) {
         if (password.length() < 8) {
             return false;

@@ -97,7 +97,7 @@ public class BookService {
     public MyArrayListBook<Book> getBorrowedBooks(Reader reader) {
         MyArrayListBook<Book> borrowedBooks = new MyArrayListBook<>();
         for (Book book : bookRepository.getAllBooks()) {
-            if (book.isTaken() && book.getReader().equals(reader)) {
+            if (book.isTaken() && book.getReader() != null && book.getReader().equals(reader)) {
                 borrowedBooks.add(book);
             }
         }

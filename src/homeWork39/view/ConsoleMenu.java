@@ -50,7 +50,7 @@ public class ConsoleMenu {
             System.out.println("13. Права доступа у пользователей, в зависимости от роли");
             System.out.println("14. Редактирование информации о книге");
             System.out.println("15. Посмотреть у кого находится книга, если занята");
-            System.out.println("16. Дата, когда была книга взята на прокат (добавить метод изменяющий эту дату)");
+            System.out.println("16. Дата, когда была книга взята на прокат (измените дату выдачи книги)");
             System.out.println("17. Получить информацию сколько дней книга находится у пользователя");
             System.out.println("0. Выход");
 
@@ -112,7 +112,7 @@ public class ConsoleMenu {
                     // Проверка, существует ли читатель с введенным именем
                     Reader reader = readerService.findReaderByName(firstName, lastName);
                     if (reader == null) {
-                        System.out.println("Читатель с именем и фамилией " + firstName +" "+ lastName + " не найден.");
+                        System.out.println("Читатель с именем и фамилией " + firstName + " " + lastName + " не найден.");
                     } else {
                         // Проверка, существует ли книга с введенным названием
                         Book book = bookService.findBookByTitle(bookTitle);
@@ -128,7 +128,7 @@ public class ConsoleMenu {
                             }
 
                             bookService.borrowBook(reader, book, takenDateStr);
-                            System.out.println("Книга взята читателем: " + firstName +" "+ lastName);
+                            System.out.println("Книга взята читателем: " + firstName + " " + lastName);
                         }
                     }
                 }
@@ -154,7 +154,7 @@ public class ConsoleMenu {
                             System.out.println("Книга с названием " + title + " не найдена.");
                         } else {
                             bookService.returnBook(reader, book);
-                            System.out.println("Книга возвращена в библиотеку: " + title);
+                            System.out.println("Книга" + title + "возвращена в библиотеку");
                         }
                     }
                 }
@@ -279,7 +279,9 @@ public class ConsoleMenu {
                         Reader newReader = new Reader(firstname, lastname, email, username, password, availableBooks);
                         newReader.setPassword(password);
                         if (!readerService.isPasswordValid(password)) {
-                            System.err.println("Попробуйте еще раз!!!");
+                            System.err.println("Неверный формат пароля. Попробуйте еще раз!!!");
+                            System.err.println("Требования к паролю: ");
+                            System.err.println("Длина >= 8, мин 1 цифра, маленькая буква, большая буква и спец.символ !%$@&");
                         } else {
                             validInput = true;
                         }
@@ -289,28 +291,28 @@ public class ConsoleMenu {
                 break;
 
                 case 12: {
-                    //12. Список книг, которые сейчас у пользователя
+                    // 12. Список книг, которые сейчас у пользователя
                     System.out.println("Введите свой логин:");
                     String username = scanner.nextLine();
                     Reader reader = readerService.findReaderByUsername(username);
                     if (reader != null) {
-                        MyArrayListBook<Book> borrowedBooks = bookService.getBorrowedBooks(reader);
+                        MyArrayListBook<Book> borrowedBooks = bookService.getBorrowedBooks();
                         if (borrowedBooks.isEmpty()) {
                             System.out.println("У данного пользователя нет взятых книг.");
                         } else {
                             System.out.println("Книги, которые сейчас у пользователя " +
                                     reader.getFirstName() + " " + reader.getLastName() + ":");
                             for (Book book : borrowedBooks) {
-                                if (book != null && book.getReader() != null) {
-                                    System.out.println(book);
+                                if (book != null) {
+                                    System.out.println(book.getTitle());
                                 }
                             }
                         }
                     } else {
                         System.out.println("Пользователь не найден.");
                     }
-                    break;
                 }
+                break;
 
                 case 13: {
                     // 13. Права доступа у пользователей, в зависимости от роли
