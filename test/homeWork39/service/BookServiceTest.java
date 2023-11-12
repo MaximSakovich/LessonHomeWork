@@ -2,7 +2,6 @@ package homeWork39.service;
 
 import homeWork39.lib.MyArrayListBook;
 import homeWork39.model.Book;
-import homeWork39.model.Reader;
 import homeWork39.repository.BookRepository;
 import homeWork39.repository.ReaderRepository;
 import org.junit.jupiter.api.BeforeEach;

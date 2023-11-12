@@ -12,3 +12,4 @@ public class HomeWork02 {
         System.out.println(kosteMilchHrywnja);
     }
 }
+//  ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKAqkEb692iQA1Fgp05E9tdZKuV5EzcZn5EldQ1zOHdr maximsakovich@gmail.com

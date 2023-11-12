@@ -77,262 +77,235 @@ public class Main {
         availableBooks.add(book1);
         availableBooks.add(book2);
 
-
-
-
         availableBooks.remove(book1);
         ConsoleMenu consoleMenu = new ConsoleMenu();
         consoleMenu.showMenu();
     }
+import java.util.List;
+import java.util.Date;
+import java.util.function.Predicate;
 
-
+// Интерфейс для книги
+interface Book {
+    String getTitle();
+    String getAuthor();
+    boolean isAvailable();
 }
-case 3: {
-                    // 3. Взятие книги из библиотеки с фиксацией даты
-                    System.out.println("Введите ваше имя:");
-                    String firstName = scanner.nextLine();
-                    System.out.println("Введите вашу фамилию:");
-                    String lastName = scanner.nextLine();
-                    System.out.println("Введите название книги, которую вы хотите взять:");
-                    String bookTitle = scanner.nextLine();
-                    System.out.println("Введите дату в формате yyyy-MM-dd:");
-                    String takenDateStr = scanner.nextLine();
 
-                    // Проверка, существует ли читатель с введенным именем
-                    Reader reader = readerService.findReaderByName(firstName, lastName);
-                    if (reader == null) {
-                        System.out.println("Читатель с именем и фамилией " + firstName + " " + lastName + " не найден.");
-                    } else {
-                        // Проверка, существует ли книга с введенным названием
-                        Book book = bookService.findBookByTitle(bookTitle);
-                        if (book == null) {
-                            System.out.println("Книга с названием " + bookTitle + " не найдена.");
+// Интерфейс для библиотеки
+interface Library {
+    void addBook(Book book);
+    List<Book> getAllBooks();
+    List<Book> getAvailableBooks();
+    List<Book> getBooksByAuthor(String author);
+    List<Book> searchBooksByTitle(String title);
+    void borrowBook(Book book, String user, Date date);
+    void returnBook(Book book, String user);
+    List<Book> getBooksBorrowedByUser(String user);
+}
+
+// Пример класса реализующего интерфейс Book
+class LibraryBook implements Book {
+    private String title;
+    private String author;
+    private boolean available;
+
+    public LibraryBook(String title, String author) {
+        this.title = title;
+        this.author = author;
+        this.available = true;
+    }
+
+    @Override
+    public String getTitle() {
+        return this.title;
+    }
+
+    @Override
+    public String getAuthor() {
+        return this.author;
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return this.available;
+    }
+}
+
+// Пример класса реализующего интерфейс Library
+class MyLibrary implements Library {
+    private List<Book> books;
+
+    // Реализация методов интерфейса
+
+    @Override
+    public void addBook(Book book) {
+        // Ваша реализация
+    }
+
+    @Override
+    public List<Book> getAllBooks() {
+        // Ваша реализация
+        return null;
+    }
+
+    // Другие методы интерфейса
+}
+
+// Пример использования предиката и лямбда-выражения
+public class Main {
+    public static void main(String[] args) {
+        Predicate<Book> availableBooks = Book::isAvailable;
+        // Пример фильтрации списка книг по доступности
+        List<Book> allBooks = new MyLibrary().getAllBooks();
+        List<Book> availableBooksList = allBooks.stream().filter(availableBooks).toList();
+        System.out.println("Список всех доступных книг: " + availableBooksList);
+    }
+}
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.function.Predicate;
+
+// Класс для представления пользователя
+class User {
+    private String name;
+    // Другие поля, если необходимо
+
+    public User(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+}
+
+// Интерфейс для библиотеки с пользователями
+interface Library {
+    void addUser(User user);
+    List<User> getAllUsers();
+    // Другие методы для работы с пользователями
+
+    // Реализация методов для работы с книгами
+}
+
+// Пример класса реализующего интерфейс Library
+class MyLibrary implements Library {
+    private List<Book> books;
+    private List<User> users;
+
+    public MyLibrary() {
+        this.books = new ArrayList<>();
+        this.users = new ArrayList<>();
+    }
+
+    // Реализация методов интерфейса
+
+    @Override
+    public void addUser(User user) {
+        this.users.add(user);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return this.users;
+    }
+
+    // Другие методы для работы с пользователями и книгами
+}
+
+// Пример использования
+public class Main {
+    public static void main(String[] args) {
+        Library myLibrary = new MyLibrary();
+
+        User user1 = new User("Иван");
+        myLibrary.addUser(user1);
+
+        // Получение всех пользователей
+        List<User> allUsers = myLibrary.getAllUsers();
+        System.out.println("Список всех пользователей: " + allUsers);
+    }
+}
+
+case 13: {
+    // 13. Права доступа у пользователей, в зависимости от роли
+    System.out.println("Введите ваш логин:");
+    String username = scanner.nextLine();
+    User user = userService.findReaderByUsername(username);
+    if (user != null) {
+        System.out.println("Имя: " + user.getFirstName());
+        System.out.println("Фамилия: " + user.getLastName());
+        userService.displayUserPermissions(user);
+    } else {
+        System.out.println("Пользователь не найден.");
+    }
+    break;
+}
+ case 13: {
+                    // 13. Права доступа у пользователей, в зависимости от роли
+                    System.out.println("Введите ваш логин:");
+                    String username = scanner.nextLine();
+                    User user = userService.findReaderByUsername(username);
+                    if (user != null) {
+                        System.out.println("Имя: " + user.getFirstName());
+                        System.out.println("Фамилия: " + user.getLastName());
+                        if (user.getRole() == UserRole.ADMIN) {
+                            System.out.println("Пользователь " + user.getUsername() + " имеет права администратора.");
+                        } else if (user.getRole() == UserRole.CLIENT) {
+                            System.out.println("Пользователь " + user.getUsername() + " имеет права клиента.");
                         } else {
-                            LocalDate takenDate;
-                            try {
-                                takenDate = LocalDate.parse(takenDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                            } catch (DateTimeParseException e) {
-                                System.out.println("Некорректный формат даты. Введите дату в формате yyyy-MM-dd.");
-                                break;
-                            }
-                            bookService.borrowBook(reader, book, takenDateStr);
-                            System.out.println("Книга взята читателем: " + firstName + " " + lastName);
+                            System.out.println("Неправильная роль пользователя.");
                         }
+                    } else {
+                        System.out.println("Пользователь не найден.");
                     }
                 }
                 break;
-
-
-@Test
-    void testGetBorrowedBooks() {
-        Book book1 = new Book("Title 1", "Author 1", 1, true);
-        Book book2 = new Book("Title 2", "Author 2", 2, true);
-        Reader reader = new Reader("John", "Doe", "john_doe");
-        book1.setReader(reader);
-        book2.setReader(reader);
-        bookService.getAllBooks().add(book1);
-        bookService.getAllBooks().add(book2);
-
-        MyArrayListBook<Book> borrowedBooks = bookService.getBorrowedBooks(reader);
-
-        assertEquals(2, borrowedBooks.size());
-        assertEquals("Title 1", borrowedBooks.get(0).getTitle());
-        assertEquals("Title 2", borrowedBooks.get(1).getTitle());
+public Book getBookById(Long id) {
+        for (Book book : books) {
+            if (book.getId() == id) {
+                return book;
+            }
+        }
+        return null;
     }
 
-    @Test
-    void returnBook() {
-        Book book = new Book("Title", "Author", 1, true);
-        Reader reader = new Reader("John", "Doe", "john_doe");
-        book.setReader(reader);
-        bookService.getAllBooks().add(book);
-
-        bookService.returnBook(reader, book);
-
-        assertFalse(book.isTaken());
-        assertNull(book.getTakenDate());
-        assertNull(book.getReader());
-    }
-    @Test
-    void borrowBook() {
-        Book book = new Book("Title", "Author", 1, false);
-        Reader reader = new Reader("John", "Doe", "john_doe");
-        bookService.getAllBooks().add(book);
-
-        bookService.borrowBook(reader, book, "2023-11-01");
-
-        assertTrue(book.isTaken());
-        assertEquals("2023-11-01", book.getTakenDate());
-        assertEquals(reader, book.getReader());
-    }
-@Test
-    void getBorrowedBooks() {
-        Book book1 = new Book("Title 1", "Author 1", 1, true);
-        Book book2 = new Book("Title 2", "Author 2", 2, true);
-        Reader reader = new Reader("John", "Doe", "john_doe");
-        book1.setReader(reader);
-        book2.setReader(reader);
-        bookService.getAllBooks().add(book1);
-        bookService.getAllBooks().add(book2);
-
-        MyArrayListBook<Book> borrowedBooks = bookService.getBorrowedBooks();
-
-        assertEquals(2, borrowedBooks.size());
-        assertEquals("Title 1", borrowedBooks.get(0).getTitle());
-        assertEquals("Title 2", borrowedBooks.get(1).getTitle());
-    }
-@Test
-    void searchBooksByTitle() {
-        Book book1 = new Book("Title", "Author 1", 1, false);
-        Book book2 = new Book("Another Title", "Author 2", 2, false);
-        bookService.getAllBooks().add(book1);
-        bookService.getAllBooks().add(book2);
-
-        MyArrayListBook<Book> foundBooks = bookService.searchBooksByTitle("Title");
-
-        assertEquals(1, foundBooks.size());
-        assertEquals("Title", foundBooks.get(0).getTitle());
+    // метод возвращает список книг, доступных для взятия, из общего списка книг.
+    public ListBook<Book> getAvailableBooks() {
+        ListBook<Book> availableBooks = new ListBook<>();
+        for (Book book : books) {
+            if (!book.isTaken()) {
+                availableBooks.add(book);
+            }
+        }
+        return availableBooks;
     }
 
-    @Test
-    void findBookById() {
-        Book book = new Book("Title", "Author", 1, false);
-        bookService.getAllBooks().add(book);
-
-        Book foundBook = bookService.findBookById(1);
-
-        assertNotNull(foundBook);
-        assertEquals("Title", foundBook.getTitle());
+ public ListBook<Book> searchBooksByTitle(String title) {
+        ListBook<Book> booksByTitle = new ListBook<>();
+        for (Book book : bookRepository.getAllBooks()) {
+            if (book.getTitle().contains(title)) {
+                booksByTitle.add(book);
+            }
+        }
+        return booksByTitle;
     }
-    @Test
-    void findBooksByTitle() {
-        Book book1 = new Book("Title", "Author", 1, false);
-        Book book2 = new Book("Title", "Another Author", 2, false);
-        bookService.getAllBooks().add(book1);
-        bookService.getAllBooks().add(book2);
-
-        MyArrayListBook<Book> foundBooks = bookService.findBooksByTitle("Title");
-
-        assertEquals(2, foundBooks.size());
-        assertEquals("Title", foundBooks.get(0).getTitle());
-        assertEquals("Title", foundBooks.get(1).getTitle());
-    }
-
-//    public void issueBook(Reader reader, String takenDate) {
-        //        this.reader = reader;
-        //        this.isTaken = true;
-        //        this.takenDate = takenDate;
-        //    }
-@Test
-    void toArray() {
-        List<Integer> items = Arrays.asList(1, 2, 3, 4, 5);
-        Integer[] expectedArray = new Integer[]{1, 2, 3, 4, 5};
-        Integer[] resultArray = myLinkedListReader.toArray(items);
-        assertArrayEquals(expectedArray, resultArray);
-    }
- @Test
-    void findBooksByTitle() {
-        // Подготовка данных
-        Book book1 = new Book(1, "Title", "Author");
-        Book book2 = new Book(2, "Title", "Another Author");
-        bookRepository.addBook(book1);
-        bookRepository.addBook(book2);
-
-        // Поиск книг по названию
-        MyArrayListBook<Book> result = bookService.findBooksByTitle("Title");
-        assertEquals(2, result.size());
-    }
-    @Test
-    void searchBooksByTitle_existingTitle() {
-        // Подготовка данных
-        Book book1 = new Book(1, "Title1", "Author1");
-        Book book2 = new Book(2, "Another Title", "Author2");
-        bookRepository.addBook(book1);
-        bookRepository.addBook(book2);
-
-        // Поиск книги по части названия
-        MyArrayListBook<Book> result = bookService.searchBooksByTitle("Title");
-        assertEquals(2, result.size());
-    }
-
-    @Test
-    void searchBooksByTitle_nonExistingTitle() {
-        // Подготовка данных
-        Book book1 = new Book(1, "Title1", "Author1");
-        Book book2 = new Book(2, "Title2", "Author2");
-        bookRepository.addBook(book1);
-        bookRepository.addBook(book2);
-
-        // Поиск книги по части названия, которой нет
-        MyArrayListBook<Book> result = bookService.searchBooksByTitle("Nonexistent Title");
-        assertTrue(result.isEmpty());
-    }
-
-    @Test
-    void getBooksByAuthor_existingAuthor() {
-        // Подготовка данных
-        Book book1 = new Book(1, "Title1", "Author");
-        Book book2 = new Book(2, "Title2", "Another Author");
-        bookRepository.addBook(book1);
-        bookRepository.addBook(book2);
-
-        // Получение книг по имени автора
-        MyArrayListBook<Book> result = bookService.getBooksByAuthor("Author");
-        assertEquals(1, result.size());
-    }
-
-    @Test
-    void getBooksByAuthor_nonExistingAuthor() {
-        // Подготовка данных
-        Book book1 = new Book(1, "Title1", "Author1");
-        Book book2 = new Book(2, "Title2", "Author2");
-        bookRepository.addBook(book1);
-        bookRepository.addBook(book2);
-
-        // Получение книг по имени несуществующего автора
-        MyArrayListBook<Book> result = bookService.getBooksByAuthor("Nonexistent Author");
-        assertTrue(result.isEmpty());
-    }
-    @Test
-    void searchBooksByTitle_existingTitle() {
-        // Подготовка данных
-        Book book1 = new Book(1, "Title1", "Author1");
-        Book book2 = new Book(2, "Another Title", "Author2");
-        bookRepository.addBook(book1);
-        bookRepository.addBook(book2);
-
-        // Поиск книги по части названия
-        MyArrayListBook<Book> result = bookService.searchBooksByTitle("Title");
-        assertEquals(1, result.size());
-        assertEquals("Title1", result.get(0).getTitle());
-    }
-
-    @Test
-    void searchBooksByTitle_nonExistingTitle() {
-        // Подготовка данных
-        Book book1 = new Book(1, "Title1", "Author1");
-        Book book2 = new Book(2, "Another Title", "Author2");
-        bookRepository.addBook(book1);
-        bookRepository.addBook(book2);
-
-        // Поиск книги по части названия, которого нет
-        MyArrayListBook<Book> result = bookService.searchBooksByTitle("Nonexistent");
-        assertTrue(result.isEmpty());
-    }
-
-    @Test
-    void getBooksByAuthor_existingAuthor() {
-        // Подготовка данных
-        Book book1 = new Book(1, "Title1", "Author1");
-        Book book2 = new Book(2, "Title2", "Author2");
-        bookRepository.addBook(book1);
-        bookRepository.addBook(book2);
-
-        // Получение списка книг по автору
-        MyArrayListBook<Book> result = bookService.getBooksByAuthor("Author1");
-        assertEquals(1, result.size());
-        assertEquals("Author1", result.get(0).getAuthor());
+    public ListBook<Book> getAvailableBooks() {
+        ListBook<Book> availableBooks = new ListBook<>();
+        for (Book book : books) {
+            if (!book.isTaken()) {
+                availableBooks.add(book);
+            }
+        }
+        return availableBooks;
     }
  */
+
+
+
+
+
 
 

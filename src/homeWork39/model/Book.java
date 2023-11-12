@@ -19,9 +19,8 @@ public class Book {
         this.isTaken = isTaken;
     }
 
-    public Book(int i, String title, String author) {
+    public Book(int i, String title1, String author1) {
     }
-
 
     @Override
     public String toString() {

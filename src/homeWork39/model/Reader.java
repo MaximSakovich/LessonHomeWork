@@ -81,13 +81,6 @@ public class Reader {
         this.borrowedBooks = borrowedBooks;
    }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     // Переопределение метода equals для сравнения объектов
     @Override
@@ -103,5 +96,13 @@ public class Reader {
     public int hashCode() {
         return Objects.hash(username);
     }
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
 }
 

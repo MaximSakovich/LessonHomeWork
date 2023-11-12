@@ -5,16 +5,18 @@ import homeWork39.model.Role;
 import homeWork39.model.Reader;
 import homeWork39.repository.ReaderRepository;
 import homeWork39.lib.MyLinkedListReader;
-
 import java.util.List;
+
 
 public class ReaderService {
     private ReaderRepository readerRepository;
-    Role roleName = new Role("some_role");
 
-    public ReaderService() {
-        this.readerRepository = new ReaderRepository();
+    public ReaderService(ReaderRepository readerRepository, Role role) {
+        this.readerRepository = readerRepository;
     }
+
+
+    public ReaderService() {this.readerRepository = new ReaderRepository();}
 
     public void saveReader(Reader reader) {
         readerRepository.addReader(reader);
@@ -31,7 +33,6 @@ public class ReaderService {
 
     //Метод добавления нового пользователя в репозиторий
     public void registerUser(String firstname, String lastname, String email, String username, String password) {
-       // Role roleName = new Role("some_role");
         Reader newReader = new Reader(firstname, lastname, email, username, password, new MyArrayListBook<>());
         readerRepository.addReader(newReader);
     }
@@ -103,13 +104,15 @@ public class ReaderService {
         return false;
     }
 
-   public void displayUserPermissions() {
+    public void displayUserPermissions() {
         // Метод для отображения прав доступа у пользователей
         for (Reader reader : readerRepository.getAllReaders()) {
             Role role = reader.getRole();
             if (role != null) {
                 System.out.println("Пользователь: " + reader.getFirstName() + " " +
                         reader.getLastName() + " Роль: " + role.getRoleName());
+                List<String> permissions = role.getPermissionsForRole(role);
+                System.out.println("Права доступа: " + permissions);
             } else {
                 System.out.println("Пользователь: " + reader.getFirstName() + " " +
                         reader.getLastName() + " Роль: Не определено");

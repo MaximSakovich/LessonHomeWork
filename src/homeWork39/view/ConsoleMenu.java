@@ -2,6 +2,7 @@ package homeWork39.view;
 
 import homeWork39.model.Reader;
 import homeWork39.model.Book;
+import homeWork39.model.Role;
 import homeWork39.repository.ReaderRepository;
 import homeWork39.service.BookService;
 import homeWork39.service.ReaderService;
@@ -11,7 +12,7 @@ import homeWork39.lib.MyLinkedListReader;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
+import java.util.*;
 
 public class ConsoleMenu {
     private BookService bookService;
@@ -274,6 +275,7 @@ public class ConsoleMenu {
                         }
                     }
                     readerService.registerUser(firstname, lastname, email, username, password);
+                    System.out.println("Пользователь зарегистрирован");
                 }
                 break;
 
@@ -405,6 +407,16 @@ public class ConsoleMenu {
         BookRepository bookRepository = new BookRepository(availableBooks);
         ReaderRepository readerRepository = new ReaderRepository();
 
+        //Role role = new Role("Администратор");
+        // Назначение прав доступа для роли
+        //List<String> permissions = Arrays.asList("Редактирование", "Чтение", "Удаление");
+        //role.assignPermissions(permissions);
+
+        // Инициализация ReaderService с объектами ReaderRepository и Role
+       // ReaderService readerService = new ReaderService(readerRepository, role);
+
+
+
         // Создание экземпляров книг
         Book book1 = new Book("Татуировщик Аушвица", "Гизер Моррис", 1, false);
         Book book2 = new Book("На западном фронте без перемен", "Эрих Мария Ремарк", 2, false);
@@ -431,6 +443,7 @@ public class ConsoleMenu {
         //availableBooks.remove(book1);
         ConsoleMenu consoleMenu = new ConsoleMenu(bookRepository, readerRepository);
         consoleMenu.showMenu();
+
 
         // Создание роли и читателя
         //  Role adminRole = new Role("Администратор");
