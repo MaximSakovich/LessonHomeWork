@@ -27,5 +27,6 @@ public class Task1 {
                 .filter(isEven.and(isGreaterThan10).and(isLessThan100))
                 .sorted()
                 .collect(Collectors.toList());
+
     }
 }
