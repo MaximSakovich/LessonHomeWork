@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class Task1 {
 
     public static void main(String[] args) {
-        List<Integer> numbers = List.of(5, 12, 25, 30, 45, 60, 75, 90, 105);
+        List<Integer> numbers = List.of(30, 5, 25, 12, 45, 60, 61, 75, 90, 105);
 
         List<Integer> filteredNumbers = filterNumbers(numbers);
         System.out.println(filteredNumbers);
@@ -25,6 +25,7 @@ public class Task1 {
 
         return numbers.stream()
                 .filter(isEven.and(isGreaterThan10).and(isLessThan100))
+                .sorted()
                 .collect(Collectors.toList());
     }
 }
