@@ -4,7 +4,7 @@ import java.util.function.Function;
 
 public class Task2 {
     public static void main(String[] args) {
-        String input = "Строка как пример для подсчета";
+        String input = "Строка как пример для подсчета символов в строке";
 
         String result = transformString(input, String::trim, String::toUpperCase, s -> "Количество символов: " + s.length());
         System.out.println(result);
