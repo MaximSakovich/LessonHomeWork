@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class Task1 {
 
     public static void main(String[] args) {
-        List<Integer> numbers = List.of(30, 5, 25, 12, 45, 60, 61, 75, 90, 105);
+        List<Integer> numbers = List.of(30, 5, 66, 25, 12, 45, 60, 91, 75, 90, 105);
 
         List<Integer> filteredNumbers = filterNumbers(numbers);
         System.out.println(filteredNumbers);
