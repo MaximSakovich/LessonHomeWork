@@ -4,6 +4,11 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+//Task 1
+//Напишите метод, принимающий список чисел и возвращающий новый, отфильтрованный список.
+// Используйте несколько предикатов для фильтрации списка чисел,
+// где числа должны быть четными, больше 10 и меньше 100
+
 public class Task1 {
 
     public static void main(String[] args) {
