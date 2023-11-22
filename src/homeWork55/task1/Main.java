@@ -1,9 +1,7 @@
 package homeWork55.task1;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Comparator;
-
+import java.util.List;
 
 //Task1
 // Из списка целых чисел выделите те значения, которые больше 10;
@@ -11,7 +9,7 @@ import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
-        List<Integer> numbers = Arrays.asList(15, 23, 8, 42, 17, 91, 30, 55);
+        List<Integer> numbers = List.of(15, 23, 8, 42, 17, 91, 30, 55);
 
         System.out.println("Значения больше 10, отсортированные по последней цифре:");
         numbers.stream()
