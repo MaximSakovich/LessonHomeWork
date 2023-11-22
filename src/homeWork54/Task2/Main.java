@@ -53,7 +53,8 @@ public class Main {
         int filterAge = 30;
         String filterCity = "Лондон";
         List<Person> result = personList.stream()
-                .filter(person -> person.getAge() > filterAge && person.getCity().equals(filterCity))
+                .filter(person -> person.getAge() > filterAge)
+                .filter(person -> person.getCity().equals(filterCity))
                 .collect(Collectors.toList());
 
         result.forEach(person -> System.out.println(person.getName() + ", " + person.getAge() + ", " + person.getCity()));
