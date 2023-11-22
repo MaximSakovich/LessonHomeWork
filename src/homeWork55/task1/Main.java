@@ -2,6 +2,7 @@ package homeWork55.task1;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Comparator;
 
 
 //Task1
@@ -15,7 +16,7 @@ public class Main {
         System.out.println("Значения больше 10, отсортированные по последней цифре:");
         numbers.stream()
                 .filter(number -> number > 10)
-                .sorted((a, b) -> Integer.compare(a % 10, b % 10))
+                .sorted(Comparator.comparingInt(n -> n % 10))
                 .forEach(System.out::println);
     }
 }
