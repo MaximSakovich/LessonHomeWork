@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        List<Integer> numbers = List.of(15, 23, 8, 42, 17, 91, 30, 55, 2, 6);
+        List<Integer> numbers = List.of(15, 23, 8, 42, 17, 91, 30, 55, 2, 6, 101);
 
         System.out.println("Значения больше 10, отсортированные по последней цифре:");
         numbers.stream()

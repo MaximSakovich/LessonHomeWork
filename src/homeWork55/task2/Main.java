@@ -19,6 +19,9 @@ public class Main {
                 .filter(word -> word.length() > 4)
                 .mapToInt(String::length)
                 .reduce(0, Integer::sum);
+
+        //.flatMapToInt(String::codePoints) // без reduce, тогда меняем тип переменной с int на long
+        //.filter(Character::isLetter)
+        //.count();
     }
 }
-
