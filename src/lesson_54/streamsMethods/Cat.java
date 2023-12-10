@@ -1,4 +1,6 @@
-package lesson_53;
+package lesson_54.streamsMethods;
+
+import java.util.Objects;
 
 public class Cat {
     private String name;
@@ -14,6 +16,26 @@ public class Cat {
     public String getName() {
         //System.out.println("getName: " + name);
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Cat cat = (Cat) o;
+
+        if (weight != cat.weight) return false;
+        if (!Objects.equals(name, cat.name)) return false;
+        return Objects.equals(color, cat.color);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + weight;
+        result = 31 * result + (color != null ? color.hashCode() : 0);
+        return result;
     }
 
     public void setName(String name) {
