@@ -13,7 +13,7 @@ public class Task1 {
         Object lock = new Object();
 
         Thread incrementThread = new Thread(() -> {
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 10000; i++) {
                 synchronized (lock) {
                     counter++;
                 }
@@ -21,7 +21,7 @@ public class Task1 {
         });
 
         Thread decrementThread = new Thread(() -> {
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 10000; i++) {
                 synchronized (lock) {
                     counter--;
                 }
