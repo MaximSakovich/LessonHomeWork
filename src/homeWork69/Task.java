@@ -32,10 +32,10 @@ public class Task {
     private static final int MAX_SIMULTANEOUS_ORDERS = 3;
     private static final int TOTAL_CUSTOMERS = 30;
 
-    private static final Semaphore tableSemaphore = new Semaphore(NUM_TABLES);
-    private static final Semaphore orderSemaphore = new Semaphore(MAX_SIMULTANEOUS_ORDERS);
-    private static final AtomicInteger totalCustomers = new AtomicInteger(0);
-    private static final AtomicInteger totalServiceTime = new AtomicInteger(0);
+    private static Semaphore tableSemaphore = new Semaphore(NUM_TABLES);
+    private static Semaphore orderSemaphore = new Semaphore(MAX_SIMULTANEOUS_ORDERS);
+    private static AtomicInteger totalCustomers = new AtomicInteger(0);
+    private static AtomicInteger totalServiceTime = new AtomicInteger(0);
 
     public static void main(String[] args) {
         Thread[] customers = new Thread[TOTAL_CUSTOMERS];
